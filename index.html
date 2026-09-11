@@ -1,5 +1,41 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Кости Баровии</title>
+<script type="module">
+  // Хендшейк с Owlbear Rodeo стартует здесь, в <head>, ПАРАЛЛЕЛЬНО с
+  // разбором всей остальной страницы — а не в самом низу, после того как
+  // браузер успеет разобрать и выполнить весь остальной скрипт (3000+
+  // строк). Раньше именно эта задержка перед стартом импорта иногда не
+  // укладывалась в 8-секундный таймаут проверки роли, из-за чего
+  // справочник оставался скрытым даже от настоящего мастера. Статический
+  // import (а не import() изнутри обычного скрипта) — тот же способ,
+  // которым эта проверка надёжно работает в двух других расширениях
+  // кампании.
+  window.__obrInit = new Promise(async (resolve) => {
+    try {
+      const mod = await import('https://cdn.jsdelivr.net/npm/@owlbear-rodeo/sdk@3.1.0/+esm');
+      const OBR = mod.default;
+      if (!OBR.isAvailable) { resolve({ obr: false }); return; }
+      OBR.onReady(async () => {
+        try {
+          const role = await OBR.player.getRole();
+          let playerId = OBR.player.id;
+          if (playerId === undefined && typeof OBR.player.getId === 'function') {
+            playerId = await OBR.player.getId();
+          }
+          let playerName = OBR.player.name;
+          if (playerName === undefined && typeof OBR.player.getName === 'function') {
+            playerName = await OBR.player.getName();
+          }
+          resolve({ obr: true, OBR, role, playerId, playerName });
+        } catch (err) {
+          resolve({ obr: true, OBR, role: null, error: err });
+        }
+      });
+    } catch (err) {
+      resolve({ obr: null, error: err });
+    }
+  });
+</script>
 </head>
 <body>
 <style>
@@ -826,6 +862,30 @@
   <div style="max-width:320px;">
     <div style="font-family:'Yeseva One',serif;font-size:20px;margin-bottom:10px;">Кости Баровии</div>
     <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Этот справочник — личные заметки мастера, игрокам он не показывается.</div>
+  </div>
+</div>
+
+<!--
+  Кнопка ниже видна только настоящему мастеру (роль GM в Owlbear Rodeo).
+  Owlbear не умеет давать роль "со-ГМ" — второй мастер почти всегда сидит
+  в комнате как обычный игрок, поэтому единственный способ показать ему
+  этот справочник — явный список разрешённых id игроков, который хранится
+  в room metadata (com.barovia.tables/access) и проверяется наравне с
+  ролью GM в скрипте внизу страницы.
+-->
+<button id="cogm-btn" type="button" hidden title="Доступ для второго ГМ" style="position:fixed;top:12px;right:12px;z-index:500;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:16px;line-height:1;box-shadow:var(--shadow);">👥</button>
+
+<div id="cogm-modal" hidden style="position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.45);">
+  <div style="max-width:380px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;box-shadow:var(--shadow);">
+    <div style="font-family:'Yeseva One',serif;font-size:17px;margin-bottom:6px;">Доступ для второго ГМ</div>
+    <p style="font-size:12.5px;color:var(--text-muted);line-height:1.5;margin:0 0 14px;">Owlbear Rodeo не даёт роли "со-ГМ" — второй мастер обычно подключается как обычный игрок. Отметь его ниже, и справочник станет виден ему тоже, пока он числится в этой комнате — даже без роли GM.</p>
+    <div id="cogm-list" style="display:flex;flex-direction:column;gap:8px;max-height:220px;overflow:auto;margin-bottom:14px;"></div>
+    <div id="cogm-empty" hidden style="font-size:12.5px;color:var(--text-muted);margin-bottom:14px;">Сейчас в комнате нет других игроков — открой это окно, когда второй ГМ зайдёт в комнату.</div>
+    <div id="cogm-error" hidden style="font-size:12.5px;color:var(--accent);margin-bottom:14px;">Не удалось получить список игроков комнаты. Попробуй закрыть и открыть окно ещё раз.</div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button id="cogm-close" type="button" style="padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:13px;">Закрыть</button>
+      <button id="cogm-save" type="button" style="padding:8px 14px;border-radius:6px;border:none;background:var(--accent);color:var(--accent-contrast);cursor:pointer;font-size:13px;">Сохранить</button>
+    </div>
   </div>
 </div>
 
@@ -3005,13 +3065,17 @@
 // всем), поэтому прячем сами данные: .wrap изначально скрыт (visibility:
 // hidden прямо в разметке — до всякого JS, чтобы не было даже доли
 // секунды мелькания контента), и показываем его ТОЛЬКО когда точно
-// подтвердили, что открывший — мастер. Если роль подтвердить не удалось
-// (сеть, таймаут, ошибка SDK) — контент остаётся скрытым, а не наоборот:
-// лучше лишний раз показать заглушку мастеру, чем хоть раз показать
-// заметки игроку.
+// подтвердили, что открывший — мастер (или игрок, которому мастер выдал
+// личный доступ — см. кнопку "👥" выше). Если ничего подтвердить не
+// удалось (сеть, таймаут, ошибка SDK) — контент остаётся скрытым, а не
+// наоборот: лучше лишний раз показать заглушку мастеру, чем хоть раз
+// показать заметки игроку. Сам хендшейк с Owlbear Rodeo (window.__obrInit)
+// запущен ещё в <head>, параллельно с разбором этого скрипта — см.
+// комментарий там.
 (function () {
   var wrap = document.getElementById('wrap');
   var gate = document.getElementById('gm-gate');
+  var ACCESS_KEY = 'com.barovia.tables/access';
 
   function reveal() {
     if (wrap) wrap.style.visibility = 'visible';
@@ -3020,48 +3084,138 @@
   function keepHidden() {
     if (gate) gate.hidden = false;
   }
+  function accessListHas(list, id) {
+    return !!id && Array.isArray(list) && list.some(function (p) { return p && p.id === id; });
+  }
 
   var settled = false;
   // Подстраховка: если проверка роли зависнет (SDK не загрузился, OBR не
-  // ответил) — через 8 секунд молча остаёмся в заглушке, а не открываем
+  // ответил) — через 15 секунд молча остаёмся в заглушке, а не открываем
   // контент навсегда скрытым для ВСЕХ (включая мастера). Мастер в таком
   // случае увидит заглушку и поймёт, что стоит обновить страницу.
   var timeout = setTimeout(function () {
     if (!settled) { settled = true; keepHidden(); }
-  }, 8000);
+  }, 15000);
 
-  (async function () {
+  Promise.resolve(window.__obrInit).then(async function (info) {
+    if (!info) {
+      if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
+      return;
+    }
+    if (info.obr === false) {
+      // Открыто не внутри Owlbear Rodeo (например мастер тестирует
+      // напрямую в браузере) — роль проверить нечем, показываем как
+      // обычную страницу.
+      if (!settled) { settled = true; clearTimeout(timeout); reveal(); }
+      return;
+    }
+    if (info.error || !info.OBR) {
+      console.warn('[Кости Баровии] не удалось проверить роль игрока', info.error);
+      if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
+      return;
+    }
+    var OBR = info.OBR;
+    if (info.role === 'GM') {
+      if (!settled) { settled = true; clearTimeout(timeout); reveal(); }
+      setupCoGmPanel(OBR, ACCESS_KEY);
+      return;
+    }
+    // Не мастер — проверяем, не выдан ли этому игроку личный доступ.
     try {
-      var mod = await import('https://cdn.jsdelivr.net/npm/@owlbear-rodeo/sdk@3.1.0/+esm');
-      var OBR = mod.default;
-      if (!OBR.isAvailable) {
-        // Открыто не внутри Owlbear Rodeo (например мастер тестирует
-        // напрямую в браузере) — роль проверить нечем, показываем как
-        // обычную страницу.
-        if (settled) return;
+      var meta = await OBR.room.getMetadata();
+      var access = meta[ACCESS_KEY];
+      if (!settled) {
         settled = true;
         clearTimeout(timeout);
-        reveal();
-        return;
+        if (accessListHas(access && access.coGMs, info.playerId)) reveal();
+        else keepHidden();
       }
-      OBR.onReady(async function () {
-        try {
-          var role = await OBR.player.getRole();
-          if (settled) return;
-          settled = true;
-          clearTimeout(timeout);
-          if (role === 'GM') reveal();
-          else keepHidden();
-        } catch (err) {
-          console.warn('[Кости Баровии] не удалось проверить роль игрока', err);
-          if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
-        }
+      // Живое обновление: если мастер выдаст доступ прямо сейчас, пока
+      // попап уже открыт, — справочник откроется сам, без перезахода.
+      OBR.room.onMetadataChange(function (m) {
+        var acc = m[ACCESS_KEY];
+        if (accessListHas(acc && acc.coGMs, info.playerId)) reveal();
+        else keepHidden();
       });
     } catch (err) {
-      console.warn('[Кости Баровии] не удалось загрузить Owlbear SDK для проверки роли', err);
+      console.warn('[Кости Баровии] не удалось проверить личный доступ', err);
       if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
     }
-  })();
+  });
+
+  // ---------- панель "Доступ для второго ГМ" (видна только мастеру) ----------
+  function setupCoGmPanel(OBR, ACCESS_KEY) {
+    var btn = document.getElementById('cogm-btn');
+    var modal = document.getElementById('cogm-modal');
+    var listEl = document.getElementById('cogm-list');
+    var emptyEl = document.getElementById('cogm-empty');
+    var errorEl = document.getElementById('cogm-error');
+    var closeBtn = document.getElementById('cogm-close');
+    var saveBtn = document.getElementById('cogm-save');
+    if (!btn || !modal) return;
+    btn.hidden = false;
+
+    async function openModal() {
+      listEl.innerHTML = '';
+      emptyEl.hidden = true;
+      errorEl.hidden = true;
+      var players = [];
+      var playersFailed = false;
+      try {
+        players = await OBR.party.getPlayers();
+      } catch (err) {
+        console.warn('[Кости Баровии] не удалось получить список игроков', err);
+        playersFailed = true;
+      }
+      var meta = {};
+      try { meta = await OBR.room.getMetadata(); } catch (err) { /* пусто — начнём с чистого списка */ }
+      var access = (meta[ACCESS_KEY] && meta[ACCESS_KEY].coGMs) || [];
+      var accessIds = access.map(function (p) { return p.id; });
+      var others = (players || []).filter(function (p) { return p && p.role !== 'GM'; });
+
+      if (playersFailed) {
+        errorEl.hidden = false;
+      } else if (!others.length) {
+        emptyEl.hidden = false;
+      }
+      others.forEach(function (p) {
+        var label = document.createElement('label');
+        label.style.cssText = 'display:flex;align-items:center;gap:8px;font-size:13.5px;';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.dataset.playerId = p.id;
+        cb.dataset.playerName = p.name || '';
+        cb.checked = accessIds.indexOf(p.id) !== -1;
+        var span = document.createElement('span');
+        span.textContent = p.name || 'Без имени';
+        label.appendChild(cb);
+        label.appendChild(span);
+        listEl.appendChild(label);
+      });
+      modal.hidden = false;
+    }
+
+    async function save() {
+      var checked = Array.prototype.slice.call(listEl.querySelectorAll('input[type=checkbox]:checked'));
+      var coGMs = checked.map(function (cb) { return { id: cb.dataset.playerId, name: cb.dataset.playerName }; });
+      saveBtn.disabled = true;
+      try {
+        var meta = await OBR.room.getMetadata();
+        var next = Object.assign({}, meta[ACCESS_KEY], { coGMs: coGMs });
+        await OBR.room.setMetadata((function () { var o = {}; o[ACCESS_KEY] = next; return o; })());
+        modal.hidden = true;
+      } catch (err) {
+        console.warn('[Кости Баровии] не удалось сохранить доступ', err);
+        alert('Не получилось сохранить — попробуй ещё раз.');
+      } finally {
+        saveBtn.disabled = false;
+      }
+    }
+
+    btn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', function () { modal.hidden = true; });
+    saveBtn.addEventListener('click', save);
+  }
 })();
 </script>
 
