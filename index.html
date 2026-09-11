@@ -1,0 +1,2988 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Кости Баровии</title>
+</head>
+<body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #ece4d4;
+    --bg-vignette: #ddd0b4;
+    --surface: #f8f3e6;
+    --surface-2: #ece0c6;
+    --border: #c7b28c;
+    --border-soft: #d9cbab;
+    --text: #2a2018;
+    --text-muted: #6d5c44;
+    --accent: #7c1f2b;
+    --accent-soft: #7c1f2b1a;
+    --accent-2: #8a6a1f;
+    --accent-2-soft: #8a6a1f22;
+    --accent-contrast: #f8f3e6;
+    --shadow: 0 1px 2px rgba(42,32,24,.06), 0 8px 24px -12px rgba(42,32,24,.25);
+    --die-face: #f8f3e6;
+    --risk-low: #4b6a3a;
+    --risk-mid: #8a6a1f;
+    --risk-high: #7c1f2b;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #130e17;
+      --bg-vignette: #1c1420;
+      --surface: #1d1620;
+      --surface-2: #261d2b;
+      --border: #3c2c3e;
+      --border-soft: #2c2130;
+      --text: #ece2d6;
+      --text-muted: #a6939c;
+      --accent: #c24a58;
+      --accent-soft: #c24a5822;
+      --accent-2: #d8b26e;
+      --accent-2-soft: #d8b26e26;
+      --accent-contrast: #130e17;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.7);
+      --die-face: #261d2b;
+      --risk-low: #7fae6a;
+      --risk-mid: #d8b26e;
+      --risk-high: #e07a86;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #130e17;
+    --bg-vignette: #1c1420;
+    --surface: #1d1620;
+    --surface-2: #261d2b;
+    --border: #3c2c3e;
+    --border-soft: #2c2130;
+    --text: #ece2d6;
+    --text-muted: #a6939c;
+    --accent: #c24a58;
+    --accent-soft: #c24a5822;
+    --accent-2: #d8b26e;
+    --accent-2-soft: #d8b26e26;
+    --accent-contrast: #130e17;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -14px rgba(0,0,0,.7);
+    --die-face: #261d2b;
+    --risk-low: #7fae6a;
+    --risk-mid: #d8b26e;
+    --risk-high: #e07a86;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light dark; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -10%, var(--bg-vignette), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: 'PT Serif', Georgia, 'Times New Roman', serif;
+    padding: 0 20px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent-2); }
+
+  .wrap { max-width: 1160px; margin: 0 auto; }
+
+  header.top {
+    padding: 56px 4px 32px;
+    text-align: center;
+  }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.08;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--border);
+    margin: 0 0 22px;
+  }
+  .ornament svg { width: 84px; height: 10px; }
+  .ornament svg path { stroke: currentColor; fill: none; }
+
+  header.top p.lede {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  nav.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    justify-content: center;
+    margin: 30px auto 0;
+    max-width: 820px;
+  }
+  nav.toc a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text-muted);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    background: var(--surface);
+    transition: border-color .15s, color .15s;
+  }
+  nav.toc a:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+  section.group {
+    margin-top: 56px;
+  }
+
+  .group-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 4px;
+    column-gap: 14px;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .group-head h2 {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-weight: 400;
+    font-size: 23px;
+    margin: 0;
+    flex: none;
+  }
+  .group-head .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scroll-margin-top: 20px;
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-head h3 {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.25;
+    margin: 0;
+  }
+  .die-badge {
+    flex: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  .card-note {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: -6px 0 0;
+  }
+
+  .roll-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  button.roll, button.calc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border: none;
+    border-radius: 3px;
+    padding: 11px 16px;
+    cursor: pointer;
+    transition: transform .08s ease, filter .15s ease;
+    flex: none;
+  }
+  button.roll:hover, button.calc:hover { filter: brightness(1.08); }
+  button.roll:active, button.calc:active { transform: translateY(1px) scale(.98); }
+  button.roll:focus-visible, button.calc:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+
+  .die-face {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--die-face);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-2);
+    transition: transform .35s cubic-bezier(.2,1.4,.4,1);
+  }
+  .die-face.spin { transform: rotate(340deg) scale(1.08); }
+
+  .result {
+    flex: 1;
+    min-width: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .result .placeholder { color: var(--text-muted); font-style: italic; }
+  .result b { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--accent); }
+
+  .risk-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 6px;
+    vertical-align: 1px;
+    border: 1px solid currentColor;
+  }
+  .risk-low { color: var(--risk-low); }
+  .risk-mid { color: var(--risk-mid); }
+  .risk-high { color: var(--risk-high); }
+
+  details.full {
+    border-top: 1px dashed var(--border-soft);
+    padding-top: 10px;
+  }
+  details.full > summary {
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    list-style: none;
+  }
+  details.full > summary::-webkit-details-marker { display: none; }
+  details.full > summary::before { content: '▸ '; color: var(--accent-2); }
+  details.full[open] > summary::before { content: '▾ '; }
+
+  table.rows {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+  table.rows th {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0 8px 6px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  table.rows td {
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.rows td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-2);
+    white-space: nowrap;
+    font-size: 12px;
+    padding-right: 12px;
+  }
+  .table-scroll { overflow-x: auto; }
+
+  .sub-results {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+  }
+  .sub-results div {
+    font-size: 14px;
+    display: flex;
+    gap: 8px;
+  }
+  .sub-results .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex: none;
+    padding-top: 2px;
+    min-width: 108px;
+  }
+
+  /* ---- route planner ---- */
+
+  .route-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    padding: 26px 26px 24px;
+  }
+
+  .route-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px 18px;
+    align-items: end;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .field select, .field input {
+    font: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 9px 10px;
+    min-width: 0;
+  }
+  .field select:focus, .field input:focus {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 1px;
+  }
+
+  .route-form .field.span2 { grid-column: span 2; }
+
+  .route-output {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .route-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 16px;
+  }
+  .route-stat .num {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .route-stat .cap {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .route-path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 18px;
+    font-size: 13.5px;
+  }
+  .route-path .stop {
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    padding: 4px 11px;
+  }
+  .route-path .leg {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .warning-box {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 10px 13px;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border-soft);
+  }
+  .check-item {
+    display: grid;
+    grid-template-columns: 96px 20px 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13.5px;
+  }
+  .check-item .time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding-top: 1px;
+  }
+  .check-item .phase {
+    font-size: 13px;
+    text-align: center;
+  }
+  .check-item .body .roll-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .check-item.hit .body { color: var(--text); }
+  .check-item.hit { background: var(--accent-soft); margin: 0 -10px; padding: 9px 10px; border-radius: 3px; }
+  .check-empty {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13.5px;
+    padding: 10px 0 0;
+  }
+
+  /* ---- combat tracker ---- */
+
+  .tk-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .tk-round {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .tk-round b { color: var(--accent); font-size: 16px; }
+
+  .tk-list { display: flex; flex-direction: column; gap: 8px; }
+  .tk-item {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    padding: 10px 12px;
+  }
+  .tk-item.current { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+  .tk-item.down { opacity: .55; }
+  .tk-init {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent-2);
+    text-align: center;
+  }
+  .tk-name-wrap { min-width: 0; }
+  .tk-name { font-size: 14.5px; font-weight: 700; }
+  .tk-name.down { text-decoration: line-through; color: var(--text-muted); }
+  .tk-hp-row { display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
+  .tk-hp-row input[type="number"] {
+    width: 56px; font: inherit; font-size: 12.5px; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 3px 5px;
+  }
+  .tk-hp-max { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--text-muted); }
+  button.tk-delta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--accent-contrast); background: var(--accent-2); border: none; border-radius: 3px;
+    padding: 3px 8px; cursor: pointer;
+  }
+  button.tk-delta.heal { background: var(--risk-low); }
+  button.tk-remove {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-muted);
+    background: none; border: 1px solid var(--border-soft); border-radius: 3px;
+    width: 26px; height: 26px; cursor: pointer;
+  }
+  button.tk-remove:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---- Strahd watch ---- */
+
+  .watch-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .watch-scale { display: flex; gap: 4px; }
+  .watch-pip {
+    width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .watch-pip.lit { background: var(--accent); border-color: var(--accent); }
+  .watch-label { font-weight: 700; font-size: 14px; color: var(--accent-2); }
+
+  /* ---- calendar / weather ---- */
+
+  .cal-row { display: flex; gap: 32px; flex-wrap: wrap; }
+  .cal-stat .num {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-size: 30px; color: var(--accent);
+  }
+  .cal-stat .cap {
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    letter-spacing: .05em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px;
+  }
+
+  footer {
+    max-width: 620px;
+    margin: 72px auto 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  footer .ornament { margin-bottom: 22px; }
+
+  /* ---- monster stat-block links + modal ---- */
+
+  button.mon-link {
+    font-family: 'PT Serif', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.96em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 0 6px;
+    margin: 0 1px;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+  button.mon-link:hover { filter: brightness(1.1); }
+  button.mon-link:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 1px; }
+
+  .mon-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 6, 4, .6);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 16px;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  .mon-backdrop.open { display: flex; }
+
+  .mon-modal {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    max-width: 760px;
+    width: 100%;
+    padding: 28px 28px 30px;
+    position: relative;
+  }
+
+  .mon-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .mon-close:hover { color: var(--accent); border-color: var(--accent); }
+
+  .mon-modal h2 {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0 0 4px;
+    padding-right: 40px;
+  }
+  .mon-type {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13.5px;
+    margin: 0 0 14px;
+  }
+  .mon-source-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: 1px;
+    font-style: normal;
+  }
+  .mon-meta-line {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 3px 0;
+  }
+  .mon-meta-line b {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: .03em;
+    margin-right: 6px;
+  }
+
+  .mon-abilities {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .mon-ability {
+    text-align: center;
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: 3px;
+    padding: 8px 2px;
+  }
+  .mon-ability .lab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .mon-ability .val { font-size: 15px; font-weight: 700; margin-top: 2px; }
+  .mon-ability .mod {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+  }
+
+  .mon-quickbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 4px 0 6px;
+    align-items: center;
+  }
+
+  .mon-section-title {
+    font-family: 'Yeseva One', Georgia, serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 20px 0 8px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-soft);
+  }
+  .mon-trait, .mon-action {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .mon-trait b, .mon-action > b { color: var(--accent); }
+  .mon-action .mon-meta-line { margin: 2px 0 4px; }
+
+  .mon-roll-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+    align-items: center;
+  }
+  button.mon-roll {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--accent-contrast);
+    background: var(--accent-2);
+    border: none;
+    border-radius: 3px;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  button.mon-roll:hover { filter: brightness(1.08); }
+  button.mon-roll:active { transform: translateY(1px); }
+  .mon-roll-result {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .mon-source-note {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ---- party / player notes ---- */
+
+  .player-card .card-note.concept { font-style: italic; }
+  .player-tbd {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    border-radius: 3px;
+    padding: 1px 6px;
+  }
+  .player-backstory p { margin: 0 0 10px; font-size: 13.5px; line-height: 1.65; }
+  .player-hook { font-size: 13.5px; line-height: 1.55; margin-bottom: 8px; }
+  .player-hook b { color: var(--accent-2); }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="kicker">Проклятие Страда · настольный справочник ведущего</p>
+    <h1>Кости Баровии</h1>
+    <div class="ornament" aria-hidden="true">
+      <svg viewBox="0 0 84 10"><path d="M0 5 H30 M54 5 H84 M42 1 L38 5 L42 9 L46 5 Z"/></svg>
+    </div>
+    <p class="lede">Все случайные таблицы книги в одном месте, плюс маршрутный калькулятор: сколько идти от точки А
+      до точки Б, пешком или верхом, и какие столкновения выпадут по дороге. Нажмите «Бросить» — результат выбирается
+      случайно, честно эмулируя броски нужных костей. Имя любого противника в результатах — кликабельная ссылка:
+      открывает его полный чарник с бросками атак, урона и другими действиями.</p>
+    <nav class="toc">
+      <a href="#party">Партия</a>
+      <a href="#route">Маршрут</a>
+      <a href="#tracker">Бой</a>
+      <a href="#encounters">Столкновения</a>
+      <a href="#loot">Сокровища и находки</a>
+      <a href="#castle-extra">Замок</a>
+      <a href="#strahd-watch">Страд следит</a>
+      <a href="#calendar">Погода и луна</a>
+      <a href="#rumors">Слухи</a>
+    </nav>
+  </header>
+
+  <section class="group" id="party">
+    <div class="group-head"><h2>Партия</h2><span class="count">заметки МП по каждому герою · кликните карточку</span></div>
+    <div class="grid" id="grid-party"></div>
+  </section>
+
+  <section class="group" id="route">
+    <div class="group-head"><h2>Маршрутный калькулятор</h2><span class="count">время в пути + автоброски столкновений</span></div>
+    <div class="route-panel">
+      <div class="route-form">
+        <div class="field">
+          <label for="rt-from">Откуда</label>
+          <select id="rt-from"></select>
+        </div>
+        <div class="field">
+          <label for="rt-to">Куда</label>
+          <select id="rt-to"></select>
+        </div>
+        <div class="field">
+          <label for="rt-mode">Способ</label>
+          <select id="rt-mode">
+            <option value="foot">Пешком</option>
+            <option value="horse">Верхом</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rt-pace">Темп</label>
+          <select id="rt-pace">
+            <option value="slow">Медленный</option>
+            <option value="normal" selected>Обычный</option>
+            <option value="fast">Быстрый</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rt-start">Время выхода</label>
+          <input type="time" id="rt-start" value="08:00">
+        </div>
+        <div class="field">
+          <label for="rt-terrain">Тип пути</label>
+          <select id="rt-terrain">
+            <option value="road" selected>Дорога (18+ на к20)</option>
+            <option value="wild">Бездорожье (15+ на к20)</option>
+          </select>
+        </div>
+        <div class="field">
+          <button class="calc" type="button" id="rt-calc">Рассчитать</button>
+        </div>
+      </div>
+      <p class="card-note" style="margin-top:14px">
+        Расстояния — приблизительная оценка по карте долины (масштаб «пешая скорость 5 км/ч»), не аптечная точность
+        первоисточника: поправь под свою карту стола, если требуется. Риск столкновений размечен из расчёта на
+        отряд из четырёх персонажей 5 уровня — на другой состав партии смотри на здравый смысл.
+      </p>
+      <div class="route-output" id="rt-output"></div>
+    </div>
+  </section>
+
+  <section class="group" id="tracker">
+    <div class="group-head"><h2>Трекер боя</h2><span class="count">инициатива и хиты прямо во время схватки</span></div>
+    <div class="route-panel">
+      <div class="route-form" id="tk-add-monster-form">
+        <div class="field span2">
+          <label for="tk-mon-select">Добавить монстра из чарников</label>
+          <select id="tk-mon-select"></select>
+        </div>
+        <div class="field">
+          <label for="tk-mon-qty">Кол-во</label>
+          <input type="number" id="tk-mon-qty" value="1" min="1" max="20">
+        </div>
+        <div class="field">
+          <button class="calc" type="button" id="tk-add-monster">Добавить в бой</button>
+        </div>
+      </div>
+      <div class="route-form" style="margin-top:12px">
+        <div class="field">
+          <label for="tk-custom-name">Имя (герой/НИП)</label>
+          <input type="text" id="tk-custom-name" placeholder="напр. Фей">
+        </div>
+        <div class="field">
+          <label for="tk-custom-init">Инициатива</label>
+          <input type="number" id="tk-custom-init" placeholder="бросить руками">
+        </div>
+        <div class="field">
+          <label for="tk-custom-hp">Хиты</label>
+          <input type="number" id="tk-custom-hp" placeholder="макс. хиты">
+        </div>
+        <div class="field">
+          <button class="calc" type="button" id="tk-add-custom">Добавить</button>
+        </div>
+      </div>
+      <div class="route-output" id="tk-output">
+        <div class="tk-toolbar">
+          <span class="tk-round">Раунд <b id="tk-round-num">1</b></span>
+          <button class="mon-roll" type="button" id="tk-next-turn">Следующий ход →</button>
+          <button class="mon-roll" type="button" id="tk-clear">Очистить бой</button>
+        </div>
+        <div class="tk-list" id="tk-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="group" id="encounters">
+    <div class="group-head"><h2>Случайные столкновения</h2><span class="count">в пути и на дорогах</span></div>
+    <div class="grid" id="grid-encounters"></div>
+  </section>
+
+  <section class="group" id="loot">
+    <div class="group-head"><h2>Сокровища и находки</h2><span class="count">лут и содержимое тайников</span></div>
+    <div class="grid" id="grid-loot"></div>
+  </section>
+
+  <section class="group" id="castle-extra">
+    <div class="group-head"><h2>Замок Равенлофт</h2><span class="count">дополнительные броски</span></div>
+    <div class="grid" id="grid-castle"></div>
+  </section>
+
+  <section class="group" id="strahd-watch">
+    <div class="group-head"><h2>Страд следит</h2><span class="count">авторский трекер внимания, не из книги</span></div>
+    <div class="route-panel">
+      <div class="watch-row">
+        <button class="mon-roll" type="button" id="watch-minus">−</button>
+        <div class="watch-scale" id="watch-scale"></div>
+        <button class="mon-roll" type="button" id="watch-plus">+</button>
+        <div class="watch-label" id="watch-label"></div>
+      </div>
+      <p class="card-note">Растёт, когда партия мешает планам Страда, убивает его слуг или подбирается к его тайнам;
+        падает, если партия долго ничем не примечательна или сама пробует задобрить его. Шкала и события ниже — не
+        официальное правило книги, а авторский инструмент для темпа кампании.</p>
+      <div class="roll-row" style="margin-top:14px">
+        <button class="roll" type="button" id="watch-roll">Бросить пакость Страда</button>
+        <div class="die-face" id="watch-die">—</div>
+        <div class="result" id="watch-result"><span class="placeholder">Ещё не брошено</span></div>
+      </div>
+      <details class="full" id="watch-full"><summary>Показать все уровни целиком</summary></details>
+    </div>
+  </section>
+
+  <section class="group" id="calendar">
+    <div class="group-head"><h2>Погода и луна</h2><span class="count">счётчик дня похода · авторская таблица погоды под тон книги</span></div>
+    <div class="route-panel">
+      <div class="cal-row">
+        <div class="cal-stat"><div class="num" id="cal-day">1</div><div class="cap">день похода</div></div>
+        <div class="cal-stat"><div class="num" id="cal-moon-icon">●</div><div class="cap" id="cal-moon-label">фаза луны</div></div>
+      </div>
+      <div class="roll-row" style="margin-top:6px">
+        <button class="calc" type="button" id="cal-next-day">Следующий день (+ новая погода)</button>
+        <button class="calc" type="button" id="cal-reroll-weather">Перебросить погоду</button>
+        <button class="mon-roll" type="button" id="cal-reset-day">Сбросить до дня 1</button>
+      </div>
+      <div class="result" id="cal-weather-result" style="margin-top:12px"><span class="placeholder">Ещё не брошено</span></div>
+      <p class="card-note" style="margin-top:10px">Книга не даёт формального календаря или таблицы погоды — здесь
+        авторский трекер под общий тон «вечно пасмурной» Баровии: 8 фаз луны условным циклом ~28 дней (важно для
+        сюжетов с вервольфами) и таблица погоды 1к20 своего сочинения.</p>
+    </div>
+  </section>
+
+  <section class="group" id="rumors">
+    <div class="group-head"><h2>Слухи и молва</h2><span class="count">пересказ своими словами реальных слухов из книги</span></div>
+    <div class="grid" id="grid-rumors"></div>
+  </section>
+
+  <footer>
+    <div class="ornament" aria-hidden="true">
+      <svg viewBox="0 0 84 10"><path d="M0 5 H30 M54 5 H84 M42 1 L38 5 L42 9 L46 5 Z"/></svg>
+    </div>
+    Составлено по материалам «Проклятия Страда» для личного использования за игровым столом.
+    Обычная заметка со всеми этими таблицами — в хранилище Obsidian, в файле «Случайные таблицы».
+  </footer>
+</div>
+
+<div class="mon-backdrop" id="mon-backdrop">
+  <div class="mon-modal" id="mon-modal" role="dialog" aria-modal="true"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  function rollDie(n) { return 1 + Math.floor(Math.random() * n); }
+
+  // ---------- Table data ----------
+
+  var TABLES = {
+    encounters: [
+      {
+        id: 'day-barovia',
+        title: 'Днём в Баровии',
+        die: '1к12 + 1к8',
+        note: 'Проверка каждые 30 мин. пути: на дороге — при 18+ на к20, в глуши — при 15+.',
+        type: 'sum', diceA: 12, diceB: 8,
+        rows: [
+          [2, '3к6 обывателей [commoner] Баровии', 'low'],
+          [3, '1к6 разведчиков [scout] Баровии', 'low'],
+          [4, 'Охотничья ловушка', 'low'],
+          [5, 'Могила', 'low'],
+          [6, 'Ложный след', 'low'],
+          [7, '1к4+1 разбойников [bandit] Вистани', 'low'],
+          [8, 'Всадник скелет [skeleton]', 'mid'],
+          [9, 'Безделушка (см. Готические безделушки)', 'low'],
+          [10, 'Схрон', 'low'],
+          [11, '1к4 роёв воронов [swarm of ravens] (50%) или 1 верворон [wereraven] в облике ворона (50%)', 'low'],
+          [12, '1к6 лютых волков [dire wolf]', 'mid'],
+          [13, '3к6 волков [wolf]', 'mid'],
+          [14, '1к4 берсерков [berserker]', 'mid'],
+          [15, 'Труп', 'low'],
+          [16, '1к6 вервольфов [werewolf] в человеческой форме', 'mid'],
+          [17, '1 друид [druid] с 2к6 ветвистыми заразами [twig blight]', 'mid'],
+          [18, '2к4 игольчатых заразы [needle blight]', 'low'],
+          [19, '1к6 пугал [scarecrow]', 'mid'],
+          [20, '1 ревенант [revenant]', 'high']
+        ]
+      },
+      {
+        id: 'night-barovia',
+        title: 'Ночью в Баровии',
+        die: '1к12 + 1к8',
+        note: 'Проверка каждые 30 мин. пути: на дороге — при 18+ на к20, в глуши — при 15+.',
+        type: 'sum', diceA: 12, diceB: 8,
+        rows: [
+          [2, '1 привидение [ghost]', 'mid'],
+          [3, 'Охотничья ловушка', 'low'],
+          [4, 'Могила', 'low'],
+          [5, 'Безделушка (см. Готические безделушки)', 'low'],
+          [6, 'Труп', 'low'],
+          [7, 'Схрон', 'low'],
+          [8, 'Всадник скелет [skeleton]', 'mid'],
+          [9, '1к8 стай летучих мышей [swarm of bats]', 'low'],
+          [10, '1к6 лютых волков [dire wolf]', 'mid'],
+          [11, '3к6 волков [wolf]', 'mid'],
+          [12, '1к4 берсерков [berserker]', 'mid'],
+          [13, '1 друид [druid] с 2к6 ветвистыми заразами [twig blight]', 'mid'],
+          [14, '2к4 игольчатых заразы [needle blight]', 'low'],
+          [15, '1к6 вервольфов [werewolf] в волчьей форме', 'mid'],
+          [16, '3к6 зомби [zombie]', 'mid'],
+          [17, '1к6 пугал [scarecrow]', 'mid'],
+          [18, '1к8 зомби Страда [Strahd zombie]', 'high'],
+          [19, '1 блуждающий огонёк [will-o’-wisp] (только 1 раз за игру)', 'mid'],
+          [20, '1 ревенант [revenant]', 'high']
+        ]
+      },
+      {
+        id: 'castle-encounters',
+        title: 'В Замке Равенлофт',
+        die: '1к12 + 1к8',
+        note: 'Проверка при первом входе персонажей в область замка и за каждые 10 мин. отдыха там же.',
+        type: 'sum', diceA: 12, diceB: 8,
+        rows: [
+          [2, 'Эсмеральда Д’Авенир [ezmerelda]'],
+          [3, 'Рахадин [rahadin]'],
+          [4, '1 чёрный кот [cat]'],
+          [5, '1 живая метла атаки [broom of animated attack]'],
+          [6, '1к4+1 летающих мечей [flying sword]'],
+          [7, 'Игрушка от Блинского'],
+          [8, 'Невидимый слуга'],
+          [9, '1к4 баровийских обывателей [commoner]'],
+          [10, '2к6 ползающих рук [crawling claw]'],
+          [11, '1к6 теней [shadow]'],
+          [12, '1к6 роёв летучих мышей [swarm of bats]'],
+          [13, '1 ползущий зомби Страда [Strahd zombie]'],
+          [14, '1к4+1 головорезов Вистани [thug] (мнимые «пленники» — на деле служат Страду)'],
+          [15, '1к4 умертвий [wight]'],
+          [16, 'Безделушка (см. Готические безделушки)'],
+          [17, 'Кокон гигантского паука (см. таблицу ниже)'],
+          [18, '1 баровийская ведьма [barovian witch]'],
+          [19, '1к4+1 порождений вампира [vampire spawn]'],
+          [20, 'Страд фон Зарович собственной персоной [strahd]']
+        ]
+      }
+    ],
+
+    loot: [
+      {
+        id: 'vistani-treasure',
+        title: 'Сокровища в шатре или фургоне вистани',
+        die: '1к20',
+        note: 'На каждый обысканный шатёр или фургон — один бросок.',
+        type: 'range',
+        rows: [
+          [1, 10, 'Ничего'],
+          [11, 13, 'Сума со 100 эм (на каждой монете — профиль Страда)'],
+          [14, 16, 'Мошна с 4к6 самоцветов по 100 зм каждый'],
+          [17, 19, 'Мешок с 3к6 дешёвых украшений по 25 зм и 1к6 дорогих по 250 зм'],
+          [20, 20, 'Один магический предмет (бросок по Таблице волшебных предметов В, Руководство Мастера)']
+        ]
+      },
+      {
+        id: 'strahd-library',
+        title: 'Книга из библиотеки Страда',
+        die: '1к12',
+        note: 'Коллекция стоит 80 000 зм целиком; тема отдельного тома — по броску.',
+        type: 'seq',
+        rows: [
+          'Том по алхимии', 'Бестиарий удивительных зверей', 'Биография забытого короля или королевы',
+          'Экзотическая кулинарная книга', 'Книга по геральдике', 'Книга о военной стратегии',
+          'Эпическая поэма', 'Путеводитель по миру изысканных вин', 'Богохульный текст',
+          'Исторический очерк', 'Антология поэзии', 'Теологический трактат'
+        ]
+      },
+      {
+        id: 'trinkets',
+        title: 'Готические безделушки',
+        die: '1к100',
+        note: 'Приложение А. Замена обычной таблицы безделушек — специально под готическую тематику.',
+        type: 'range',
+        rows: [
+          [1,2,'Рисунок, на котором вы в детстве изобразили вашего воображаемого друга'],
+          [3,4,'Замок, который открывается только если капнуть кровью в его замочную скважину'],
+          [5,6,'Одежда, снятая с пугала'],
+          [7,8,'Волчок с вырезанными на нём четырьмя лицами: счастливым, грустным, гневным и мёртвым'],
+          [9,10,'Ожерелье близкого родственника, который умер в день вашего рождения'],
+          [11,12,'Пучок волос казнённого через обезглавливание'],
+          [13,14,'Нераспечатанное письмо вам от вашего умирающего отца'],
+          [15,16,'Карманные часы, отсчитывающие час назад каждую полночь'],
+          [17,18,'Шинель, украденная у умирающего солдата'],
+          [19,20,'Пузырёк невидимых чернил, которые можно прочесть только на закате'],
+          [21,22,'Бурдюк вина, который наполняется, если оставить его на ночь с мертвецом'],
+          [23,24,'Серебряные столовые приборы, которыми король ел в свой последний раз'],
+          [25,26,'Подзорная труба, показывающая лишь мир, в котором бушует ужасный шторм'],
+          [27,28,'Медальон с профилем, лицо которого расцарапано'],
+          [29,30,'Фонарь с чёрной свечой, которая никогда не заканчивается и горит зелёным пламенем'],
+          [31,32,'Чайная кружка из детского сервиза, заляпанная кровью'],
+          [33,34,'Маленькая чёрная книжка, записывающая только ваши сны'],
+          [35,36,'Ожерелье, составленное из святых символов дюжины разных божеств'],
+          [37,38,'Верёвка висельника, которая кажется что весит больше, чем должна'],
+          [39,40,'Клетка для птиц, в которую влетают маленькие птицы, но оказавшись внутри — больше не едят и не покидают её'],
+          [41,42,'Гербарий с бабочками, узоры на крыльях которых напоминают черепа'],
+          [43,44,'Сосуд с языками упырей в формалине'],
+          [45,46,'Деревянный протез руки отъявленного пирата'],
+          [47,48,'Урна с прахом мёртвого родственника'],
+          [49,50,'Ручное зеркало с бронзовым изображением медузы на обратной стороне'],
+          [51,52,'Перчатки из бледной кожи с ногтями из слоновой кости'],
+          [53,54,'Игральные кости, сделанные из костяшек отъявленного шарлатана'],
+          [55,56,'Кольцо с ключами от утерянных замков'],
+          [57,58,'Гвозди из гроба убийцы'],
+          [59,60,'Ключ от семейной крипты'],
+          [61,62,'Букет похоронных цветов, которые всегда выглядят и пахнут как свежие'],
+          [63,64,'Хлыст, которым вас наказывали в детстве'],
+          [65,66,'Музыкальная шкатулка, которая играет сама по себе, когда держащий её танцует'],
+          [67,68,'Прогулочная трость с железным наконечником, который выбивает искры из камней'],
+          [69,70,'Флаг корабля, пропавшего в море'],
+          [71,72,'Фарфоровая голова куклы, которая кажется постоянно смотрит на вас'],
+          [73,74,'Серебряный свисток в виде головы волка'],
+          [75,76,'Маленькое зеркальце, показывающее значительно более старую версию смотрящегося'],
+          [77,78,'Маленькая, поношенная книга детских стихов'],
+          [79,80,'Мумифицированный коготь ворона'],
+          [81,82,'Сломанная подвеска в виде серебряного дракона, всегда холодная на ощупь'],
+          [83,84,'Маленькая запертая шкатулка, тихо напевающая прекрасную мелодию по ночам, но вы всегда забываете её наутро'],
+          [85,86,'Чернильница, пишущему с помощью которой становится слегка дурно'],
+          [87,88,'Старая, маленькая кукла из тёмного, плотного дерева, у которой отсутствуют рука и нога'],
+          [89,90,'Чёрный колпак палача'],
+          [91,92,'Мошна из плоти, сшитой сухожилиями'],
+          [93,94,'Крохотный клубок чёрной нити, которая никогда не заканчивается'],
+          [95,96,'Крохотная статуэтка танцовщицы, в которой не хватает шестерни, и потому она не работает'],
+          [97,98,'Чёрная деревянная курительная трубка, дым из которой выходит в форме черепов'],
+          [99,100,'Пузырёк духов, запах которых могут учуять только определённые существа']
+        ]
+      }
+    ],
+
+    castle: [
+      {
+        id: 'cocoon',
+        title: 'Кокон гигантского паука',
+        die: '1к6',
+        note: 'Содержимое кокона, обнаруженного в замке (см. «В Замке Равенлофт» выше, результат 17).',
+        type: 'seq',
+        rows: [
+          'Деревянный манекен, одетый в мантию',
+          'Баровийская ведьма [barovian witch] — кричит подобно дикому зверю и начинает колдовать',
+          'Зомби Страда [strahd zombie] — сражается до тех пор, пока не будет убит',
+          'Баровийский сумасшедший [commoner] — начинает хихикать; исцеляется малым восстановлением',
+          'Мёртвый баровианин с роем гигантских пауков внутри тела [swarm of insects]',
+          'Разбойник Вистани [bandit] — помогает персонажам, пока не появится Страд или другие вистани, затем предаёт'
+        ]
+      },
+      {
+        id: 'vallaki-house',
+        title: 'Обитатели дома в Валлаки',
+        die: '1к20',
+        note: 'Для любого исследуемого дома, кроме особняка бургомистра.',
+        type: 'range',
+        rows: [
+          [1,3,'Никого'],
+          [4,5,'2к4 роя крыс [swarm of rats] — слуги Страда, нападают'],
+          [6,18,'Валлакианские горожане: 1к4 взрослых обывателей [commoner] и 1к8−1 детей'],
+          [19,20,'Валлакианские культисты [cultist]']
+        ]
+      },
+      {
+        id: 'revenant-body',
+        title: 'Где восстаёт тело ревенанта',
+        die: '1к20',
+        note: 'Если тело ревенанта уничтожено до завершения мести — где ищет новое.',
+        type: 'range',
+        rows: [
+          [1,4,'Кладбище деревни Баровия'],
+          [5,11,'Церковное кладбище в Валлаки'],
+          [12,12,'Кладбище Аргинвостхольта'],
+          [13,13,'Могила в деревне Крезк'],
+          [14,14,'Могила на кладбище Берез'],
+          [15,16,'Могила в Сваличском лесу (там, где случилось «Случайное столкновение»)'],
+          [17,20,'Тело покойного персонажа игрока или НИПа, там, где оно оказалось']
+        ]
+      }
+    ],
+
+    rumors: [
+      {
+        id: 'rumor-barovia',
+        title: 'Общая баровийская молва',
+        die: '1к8',
+        note: 'Знает почти любой обыватель, завоевавший доверие; пересказ своими словами, не цитата книги.',
+        type: 'seq',
+        rows: [
+          'Страд — вампир из замка Равенлофт; чужакам там не рады.',
+          'Люди верят, что проклятие Баровии — расплата за грехи предков (хотя это неправда).',
+          'Днём вампир спит в гробу; ночью повелевает волками и крысами, может обращаться в летучую мышь, волка или туман.',
+          'По ночам призраки бредут по Старой Сваличской дороге к замку — говорят, такая судьба ждёт всех врагов Страда.',
+          'Вистани — единственные, кому вольно покидать Баровию; поговаривают, что они служат Страду.',
+          'Плохая примета — обижать воронов.',
+          'Утренний Бог когда-то оберегал баровийцев, но с приходом проклятия солнце не показывается, а молитвы остаются без ответа.',
+          'Мать Ночь тоже будто отвернулась от людей — и наслала на них дьявола Страда, если верить старикам.'
+        ]
+      },
+      {
+        id: 'rumor-vistani',
+        title: 'Молва вистани',
+        die: '1к8',
+        note: 'Знают сами вистани, завоевавшие доверие охотнее делятся байками о своём народе и Страде.',
+        type: 'seq',
+        rows: [
+          'Страд — благородных кровей, умер века назад, но восстал нежитью, что питается кровью живых.',
+          'У Страда было много жён, но единственная истинная любовь — баровийская крестьянка по имени Татьяна.',
+          'Замок назван «Равенлофт» в честь его матери, королевы Равеновии.',
+          'Долина названа в честь отца Страда, короля Барова; волки, летучие мыши и другие твари служат ему шпионами.',
+          'Крезк, Валлаки и Деревня Баровия стоят на Старой Сваличской дороге, как бусины на нити — и в каждом есть глаза Страда.',
+          'Старую ветряную мельницу между Баровией и Валлаки лучше обходить любой ценой — вистани отказываются объяснять почему.',
+          'Души умерших в Баровии не могут покинуть владения Страда даже после смерти.',
+          'Из всех вистанских провидиц никто не сравнится с Мадам Евой — но ни одна вистанка не способна увидеть собственную судьбу.'
+        ]
+      },
+      {
+        id: 'rumor-vallaki',
+        title: 'Молва о Валлаки',
+        die: '1к8',
+        note: 'В дополнение к общей молве — то, что знают именно валлакийцы.',
+        type: 'seq',
+        rows: [
+          'В «Синей Воде» недавно остановился остроухий чужак, прибывший в город на цирковом фургоне.',
+          'К юго-западу от города стоит лагерь вистани — они не жалуют Валлаки, и им тут не рады.',
+          'К западу — особняк с призраками; по легенде, там когда-то погиб дракон.',
+          'К югу — деревня, заброшенная десятилетия назад: её бургомистр чем-то прогневал Страда.',
+          'На чердаке особняка леди Фионы Вахтер порой видят всполохи пурпурного света.',
+          'Волки и лютые волки всё смелее нападают на путников на Старой Сваличской дороге, и их становится больше.',
+          'Рыбачить на озере Зарович опасно, но местный пьяница Блуто Крогаров всё равно выходит на промысел каждый день — и ни разу ничего не поймал.',
+          'Безумного мага с горы Бараток давно не видели, но кто-то бросал молнии в воду озера с северного берега.'
+        ]
+      },
+      {
+        id: 'rumor-krezk',
+        title: 'Молва о Крезке',
+        die: '1к5',
+        note: 'В дополнение к общей молве — местные новости Крезка.',
+        type: 'seq',
+        rows: [
+          'Жители Крезка почти не покидают деревню — боятся волков, лютых волков и вервольфов.',
+          'Раз в месяц из Винного Волшебника привозят вино — эта поставка держит деревню на плаву.',
+          'Бургомистр Дмитрий Крезков недавно потерял последнего из четверых детей — 14-летнего Илью.',
+          'Глава аббатства не постарел ни на день за век — многие считают его слугой Страда или переодетым вампиром.',
+          'В аббатство больше никто не ходит: колокол звонит невпопад, а из-за стен слышен нечеловеческий смех.'
+        ]
+      }
+    ]
+  };
+
+  var RISK_LABEL = { low: 'риск: низкий', mid: 'риск: умеренный', high: 'риск: высокий' };
+
+  // ---------- Bestiary: monster stat blocks ----------
+  // source: 'book'  — Приложение D «Проклятия Страда» (уникальный чарник, дословно по книге)
+  // source: 'dndsu' — стандартный чарник D&D 5e (2014), сверено с переводом dnd.su/bestiary
+  // source: 'mm'    — стандартный чарник D&D 5e (2014) по SRD; не удалось напрямую сверить
+  //                    страницу dnd.su в это исследование (см. отчёт), значения — общепринятые MM.
+
+  var A = function (str, mod) { return [str, mod]; }; // ability score + modifier, для краткости записи
+
+  var MONSTERS = {
+
+    // ---- Простые НИП / звери (dndsu/mm) ----
+
+    commoner: {
+      name: 'Обыватель', type: 'Средний гуманоид (любой), любое мировоззрение', source: 'dndsu',
+      ac: '10', hp: { avg: 4, formula: '1к8' }, speed: '30 фт.',
+      abilities: { str: A(10,0), dex: A(10,0), con: A(10,0), int: A(10,0), wis: A(10,0), cha: A(10,0) },
+      senses: 'пассивное Восприятие 10', languages: 'любой один (обычно Общий)', cr: '0 (10 опыта)',
+      traits: [],
+      actions: [
+        { name: 'Дубинка', text: 'Рукопашная атака оружием.', toHit: 2, reach: '5 фт., одна цель', damage: [{ formula: '1d4', type: 'дробящий' }] }
+      ]
+    },
+    scout: {
+      name: 'Разведчик', type: 'Средний гуманоид (любой), любое мировоззрение', source: 'dndsu',
+      ac: '13 (кожаный доспех)', hp: { avg: 16, formula: '3к8+3' }, speed: '30 фт.',
+      abilities: { str: A(11,0), dex: A(14,2), con: A(12,1), int: A(11,0), wis: A(13,1), cha: A(11,0) },
+      skills: 'Природа +4, Восприятие +5, Скрытность +6, Выживание +5',
+      senses: 'пассивное Восприятие 15', languages: 'любой один язык', cr: '1/2 (100 опыта)',
+      traits: [{ name: 'Острый слух и зрение', text: 'Разведчик имеет преимущество на проверки Мудрости (Восприятие), основанные на слухе или зрении.' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Разведчик совершает две атаки: короткими мечами или длинным луком.', toHit: null, damage: [] },
+        { name: 'Короткий меч', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+2', type: 'колющий' }] },
+        { name: 'Длинный лук', text: 'Дальнобойная атака оружием.', toHit: 4, reach: 'дистанция 150/600 фт., одна цель', damage: [{ formula: '1d8+2', type: 'колющий' }] }
+      ]
+    },
+    bandit: {
+      name: 'Разбойник', type: 'Средний гуманоид (любой), любое неблагое мировоззрение', source: 'dndsu',
+      ac: '12 (кожаный доспех)', hp: { avg: 11, formula: '2к8+2' }, speed: '30 фт.',
+      abilities: { str: A(11,0), dex: A(12,1), con: A(12,1), int: A(10,0), wis: A(10,0), cha: A(10,0) },
+      senses: 'пассивное Восприятие 10', languages: 'любой один язык', cr: '1/8 (25 опыта)',
+      traits: [],
+      actions: [
+        { name: 'Ятаган', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d6+1', type: 'рубящий' }] },
+        { name: 'Лёгкий арбалет', text: 'Дальнобойная атака оружием.', toHit: 3, reach: 'дистанция 80/320 фт., одна цель', damage: [{ formula: '1d8+1', type: 'колющий' }] }
+      ]
+    },
+    direwolf: {
+      name: 'Лютый волк', type: 'Большой зверь, без мировоззрения', source: 'dndsu',
+      ac: '14 (естественный доспех)', hp: { avg: 37, formula: '5к10+10' }, speed: '50 фт.',
+      abilities: { str: A(17,3), dex: A(15,2), con: A(15,2), int: A(3,-4), wis: A(12,1), cha: A(7,-2) },
+      skills: 'Восприятие +3, Скрытность +4',
+      senses: 'пассивное Восприятие 13', languages: '—', cr: '1 (200 опыта)',
+      traits: [
+        { name: 'Острые слух и нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на слухе или обонянии.' },
+        { name: 'Тактика стаи', text: 'Преимущество на бросок атаки по существу, если хотя бы один союзник волка находится в 5 фт. от цели и не выведен из строя.' }
+      ],
+      actions: [
+        { name: 'Укус', text: 'Рукопашная атака оружием. Если цель — существо, оно должно преуспеть в спасброске Силы Сл 13, иначе будет сбито с ног.', toHit: 5, reach: '5 фт., одна цель', damage: [{ formula: '2d6+3', type: 'колющий' }] }
+      ]
+    },
+    wolf: {
+      name: 'Волк', type: 'Средний зверь, без мировоззрения', source: 'dndsu',
+      ac: '13 (естественный доспех)', hp: { avg: 11, formula: '2к8+2' }, speed: '40 фт.',
+      abilities: { str: A(12,1), dex: A(15,2), con: A(12,1), int: A(3,-4), wis: A(12,1), cha: A(6,-2) },
+      skills: 'Восприятие +3, Скрытность +4',
+      senses: 'пассивное Восприятие 13', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [
+        { name: 'Острые слух и нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на слухе или обонянии.' },
+        { name: 'Тактика стаи', text: 'Преимущество на бросок атаки по существу, если хотя бы один союзник волка находится в 5 фт. от цели и не выведен из строя.' }
+      ],
+      actions: [
+        { name: 'Укус', text: 'Рукопашная атака оружием. Если цель — существо, оно должно преуспеть в спасброске Силы Сл 11, иначе будет сбито с ног.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '2d4+2', type: 'колющий' }] }
+      ]
+    },
+    berserker: {
+      name: 'Берсерк', type: 'Средний гуманоид (любой), любое неблагое мировоззрение', source: 'dndsu',
+      ac: '13 (кожаный доспех)', hp: { avg: 67, formula: '9к8+27' }, speed: '30 фт.',
+      abilities: { str: A(16,3), dex: A(12,1), con: A(17,3), int: A(9,-1), wis: A(11,0), cha: A(9,-1) },
+      senses: 'пассивное Восприятие 10', languages: 'любой один язык', cr: '2 (450 опыта)',
+      traits: [{ name: 'Безрассудность', text: 'Берсерк может действовать безрассудно в начале своего хода этого хода, получая преимущество на рукопашные атаки, но атаки по нему до начала его следующего хода совершаются с преимуществом.' }],
+      actions: [
+        { name: 'Секира', text: 'Рукопашная атака оружием.', toHit: 5, reach: '5 фт., одна цель', damage: [{ formula: '1d12+3', type: 'рубящий' }] }
+      ]
+    },
+    werewolf: {
+      name: 'Вервольф', type: 'Средний гуманоид (человек, оборотень), хаотично-злой', source: 'dndsu',
+      ac: '11 (12 в волчьей форме)', hp: { avg: 58, formula: '9к8+18' }, speed: '30 фт. (40 фт. в волчьей форме)',
+      abilities: { str: A(15,2), dex: A(13,1), con: A(14,2), int: A(10,0), wis: A(11,0), cha: A(10,0) },
+      skills: 'Восприятие +4, Скрытность +3',
+      immunities: 'дробящий, колющий и рубящий урон от немагических атак, кроме серебряного оружия',
+      senses: 'пассивное Восприятие 14', languages: 'Общий (не может говорить в волчьей форме)', cr: '3 (700 опыта)',
+      traits: [
+        { name: 'Перевёртыш', text: 'Действием превращается в крупного волка, гибрид волка и гуманоида, либо принимает истинный гуманоидный облик.' },
+        { name: 'Острые слух и нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на слухе или обонянии.' }
+      ],
+      actions: [
+        { name: 'Мультиатака (гуманоид/гибрид)', text: 'Две рукопашные атаки.', toHit: null, damage: [] },
+        { name: 'Укус (волк/гибрид)', text: 'Рукопашная атака оружием. Гуманоид, получивший урон, должен пройти спасбросок Телосложения Сл 12, иначе будет проклят ликантропией вервольфа.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d8+2', type: 'колющий' }] },
+        { name: 'Когти (гибрид)', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '2d4+2', type: 'рубящий' }] },
+        { name: 'Ятаган (гуманоид/гибрид)', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+3', type: 'рубящий' }] }
+      ]
+    },
+    druid: {
+      name: 'Друид', type: 'Средний гуманоид (любой), любое нейтральное мировоззрение', source: 'dndsu',
+      ac: '11 (16 с корой)', hp: { avg: 27, formula: '5к8+5' }, speed: '30 фт.',
+      abilities: { str: A(11,0), dex: A(12,1), con: A(13,1), int: A(12,1), wis: A(15,2), cha: A(11,0) },
+      skills: 'Медицина +4, Природа +3, Восприятие +4',
+      senses: 'пассивное Восприятие 14', languages: 'Друидический плюс два других языка', cr: '2 (450 опыта)',
+      traits: [{ name: 'Использование заклинаний', text: 'Друид 4 уровня (Мудрость, Сл спасброска 12, +4 к попаданию). Заговоры: друидизм, ядовитые брызги, создание пламени. 1-й ур. (4 ячейки): опутывание, увеличение скорости, говорить с животными, громовая волна. 2-й ур. (3 ячейки): послание животным, кора, шипастый рост.' }],
+      actions: [
+        { name: 'Посох', text: 'Рукопашная атака оружием (двумя руками — 1d8).', toHit: 2, reach: '5 фт., одна цель', damage: [{ formula: '1d6', type: 'дробящий' }] }
+      ]
+    },
+    twigblight: {
+      name: 'Ветвистая зараза', type: 'Маленькое растение, нейтрально-злое', source: 'dndsu',
+      ac: '13', hp: { avg: 4, formula: '1к6+1' }, speed: '20 фт.',
+      abilities: { str: A(6,-2), dex: A(13,1), con: A(12,1), int: A(4,-3), wis: A(8,-1), cha: A(3,-4) },
+      vulnerabilities: 'огонь', resistances: 'колющий',
+      senses: 'слепое зрение 60 фт. (слеп дальше), пассивное Восприятие 9',
+      languages: 'понимает Общий и Друидический, но не говорит', cr: '1/8 (25 опыта)',
+      traits: [{ name: 'Обманчивая внешность', text: 'Пока зараза без движения, неотличима от обычного растения.' }],
+      actions: [{ name: 'Коготь', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d4+1', type: 'рубящий' }] }]
+    },
+    needleblight: {
+      name: 'Игольчатая зараза', type: 'Маленькое растение, нейтрально-злое', source: 'dndsu',
+      ac: '12', hp: { avg: 11, formula: '2к6+4' }, speed: '30 фт.',
+      abilities: { str: A(6,-2), dex: A(12,1), con: A(14,2), int: A(4,-3), wis: A(10,0), cha: A(3,-4) },
+      vulnerabilities: 'огонь', resistances: 'колющий',
+      senses: 'слепое зрение 60 фт. (слеп дальше), пассивное Восприятие 10',
+      languages: 'понимает Общий и Друидический, но не говорит', cr: '1/4 (50 опыта)',
+      traits: [{ name: 'Обманчивая внешность', text: 'Пока зараза без движения, неотличима от обычного растения.' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки когтем.', toHit: null, damage: [] },
+        { name: 'Коготь', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d4', type: 'колющий' }] },
+        { name: 'Игла', text: 'Дальнобойная атака оружием.', toHit: 3, reach: 'дистанция 20/60 фт., одна цель', damage: [{ formula: '2d4+1', type: 'колющий' }] }
+      ]
+    },
+    scarecrow: {
+      name: 'Пугало', type: 'Среднее нежить, нейтрально-злое', source: 'dndsu',
+      ac: '11', hp: { avg: 36, formula: '8к8' }, speed: '30 фт.',
+      abilities: { str: A(11,0), dex: A(11,0), con: A(11,0), int: A(10,0), wis: A(10,0), cha: A(13,1) },
+      immunities: 'яд', condImmunities: 'испуганный, отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 10',
+      languages: 'понимает Общий, но не говорит', cr: '1 (200 опыта)',
+      traits: [{ name: 'Обманчивая внешность', text: 'Пока пугало без движения, неотличимо от обычного чучела.' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки когтем.', toHit: null, damage: [] },
+        { name: 'Коготь', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d8', type: 'рубящий' }] },
+        { name: 'Пугающий взгляд', text: 'Одно существо в пределах 30 фт., видящее пугало, спасбросок Мудрости Сл 13 или становится испуганным на 1 минуту (повторяет спасбросок каждый ход).', toHit: null, damage: [] }
+      ]
+    },
+    revenant: {
+      name: 'Ревенант', type: 'Средний нежить, любое доброе мировоззрение', source: 'dndsu',
+      ac: '13 (естественный доспех)', hp: { avg: 136, formula: '16к8+64' }, speed: '30 фт.',
+      abilities: { str: A(15,2), dex: A(13,1), con: A(18,4), int: A(10,0), wis: A(13,1), cha: A(10,0) },
+      resistances: 'некротический; дробящий, колющий, рубящий от немагических атак',
+      condImmunities: 'очарованный, испуганный, парализованный, отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 11',
+      languages: 'любой известный при жизни', cr: '5 (1800 опыта)',
+      traits: [
+        { name: 'Регенерация', text: 'Восстанавливает 10 хитов в начале хода, если у него есть хотя бы 1 хит; не действует в ход, когда получил урон излучением или огнём.' },
+        { name: 'Возрождение', text: 'Если убийца его цели ещё жив, уничтоженный ревенант через 24 часа восстаёт вновь в пределах 60 футов от места смерти, если только его останки не сожжены.' },
+        { name: 'Мстительный следопыт', text: 'Ревенант точно знает направление и расстояние до своей цели мести, пока оба на одном плане.' }
+      ],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки Ударом.', toHit: null, damage: [] },
+        { name: 'Удар', text: 'Рукопашная атака оружием. Если цель не является объектом мести ревенанта, она должна пройти спасбросок Телосложения Сл 13 или её Сила снижается на 1к4 (до конца продолжительного отдыха); при падении Силы до 0 — цель парализована.', toHit: 5, reach: '5 фт., одна цель', damage: [{ formula: '2d6+2', type: 'дробящий' }] },
+        { name: 'Зловещий взгляд (перезаряжается после отдыха)', text: 'Цель мести в пределах 30 фт., видящая ревенанта, спасбросок Мудрости Сл 13 или парализована до начала следующего хода ревенанта.', toHit: null, damage: [] }
+      ]
+    },
+    ghost: {
+      name: 'Привидение', type: 'Среднее нежить, любое мировоззрение', source: 'dndsu',
+      ac: '11', hp: { avg: 45, formula: '10к8' }, speed: '0 фт., полёт 40 фт. (парение)',
+      abilities: { str: A(7,-2), dex: A(13,1), con: A(10,0), int: A(10,0), wis: A(12,1), cha: A(17,3) },
+      resistances: 'кислота, огонь, гром, электричество; дробящий/колющий/рубящий от немагических атак',
+      immunities: 'холод, некротический, яд',
+      condImmunities: 'очарованный, истощение, схваченный, парализованный, окаменевший, отравленный, сбитый с ног, обездвиженный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 11',
+      languages: 'любой известный при жизни', cr: '4 (1100 опыта)',
+      traits: [
+        { name: 'Эфирное зрение', text: 'Привидение видит эфирный план на 60 фт., находясь на материальном плане, и наоборот.' },
+        { name: 'Бестелесное перемещение', text: 'Может двигаться сквозь других существ и объекты, как через сложную местность.' }
+      ],
+      actions: [
+        { name: 'Иссушающее касание', text: 'Рукопашная атака заклинанием.', toHit: 5, reach: '5 фт., одна цель', damage: [{ formula: '4d6+3', type: 'некротический' }] },
+        { name: 'Ужасающий облик', text: 'Одно существо в пределах 60 фт., видящее привидение: спасбросок Мудрости Сл 13 или становится испуганным на 1 минуту.', toHit: null, damage: [] },
+        { name: 'Одержимость (перезаряжается 6)', text: 'Одно гуманоидное существо в пределах 5 фт.: спасбросок Харизмы Сл 13 или привидение вселяется в его тело и изгоняет его разум.', toHit: null, damage: [] }
+      ]
+    },
+    swarmbats: {
+      name: 'Рой летучих мышей', type: 'Средний рой Крошечных зверей, без мировоззрения', source: 'dndsu',
+      ac: '12', hp: { avg: 22, formula: '5к8' }, speed: '5 фт., полёт 30 фт.',
+      abilities: { str: A(5,-3), dex: A(15,2), con: A(10,0), int: A(2,-4), wis: A(12,1), cha: A(4,-3) },
+      skills: 'Восприятие +3, Скрытность +4',
+      resistances: 'дробящий, колющий, рубящий',
+      condImmunities: 'очарованный, испуганный, схваченный, парализованный, окаменевший, сбитый с ног, обездвиженный, ошеломлённый',
+      senses: 'слепое зрение 60 фт., пассивное Восприятие 13', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [
+        { name: 'Эхолокация', text: 'Рой не может использовать слепое зрение, будучи оглушённым.' },
+        { name: 'Рой', text: 'Может занимать пространство другого существа. Совершает атаку с помехой, если в нём осталась половина хитов или меньше.' }
+      ],
+      actions: [{ name: 'Укусы', text: 'Рой совершает атаку кучей укусов по одной цели в своём пространстве. Урон уменьшается вдвое при половине хитов роя.', toHit: 4, reach: '0 фт., одна цель в пространстве роя', damage: [{ formula: '2d4', type: 'колющий' }] }]
+    },
+    zombie: {
+      name: 'Зомби', type: 'Средняя нежить, нейтрально-злое', source: 'dndsu',
+      ac: '8', hp: { avg: 22, formula: '3к8+9' }, speed: '20 фт.',
+      abilities: { str: A(13,1), dex: A(6,-2), con: A(16,3), int: A(3,-4), wis: A(6,-2), cha: A(5,-3) },
+      saves: 'Мдр +0', immunities: 'яд', condImmunities: 'отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 8',
+      languages: 'понимает языки, известные при жизни, но не говорит', cr: '1/4 (50 опыта)',
+      traits: [{ name: 'Стойкость нежити', text: 'Если урон снижает хиты зомби до 0, но это не радиантный урон и не крит, зомби проходит спасбросок Телосложения Сл 5+урон; при успехе остаётся на 1 хите.' }],
+      actions: [{ name: 'Удар', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d6+1', type: 'дробящий' }] }]
+    },
+    willowisp: {
+      name: 'Блуждающий огонёк', type: 'Крошечная нежить, нейтрально-злое', source: 'dndsu',
+      ac: '19', hp: { avg: 22, formula: '9к4' }, speed: '0 фт., полёт 50 фт. (парение)',
+      abilities: { str: A(1,-5), dex: A(28,9), con: A(10,0), int: A(13,1), wis: A(14,2), cha: A(11,0) },
+      resistances: 'кислота, холод, огонь, некротический, гром; дробящий/колющий/рубящий от немагических атак',
+      immunities: 'электричество, яд',
+      condImmunities: 'истощение, схваченный, парализованный, отравленный, сбитый с ног, обездвиженный, без сознания',
+      senses: 'тёмное зрение 120 фт., пассивное Восприятие 12',
+      languages: 'понимает Общий и Первичный, но не говорит', cr: '2 (450 опыта)',
+      traits: [
+        { name: 'Поглощение жизни', text: 'Если гуманоид умирает в пределах 5 фт. от огонька, тот может восстановить 10 хитов.' },
+        { name: 'Бестелесное перемещение', text: 'Может двигаться через других существ и объекты как через сложную местность.' },
+        { name: 'Переменное свечение', text: 'Огонёк излучает тусклый свет радиусом от 5 до 20 фт., может менять радиус или гасить свет действием.' }
+      ],
+      actions: [{ name: 'Разряд', text: 'Рукопашная атака заклинанием. Атакует только цель, которая может видеть огонёк.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '2d8', type: 'электричество' }] }]
+    },
+    cat: {
+      name: 'Кот', type: 'Крошечный зверь, без мировоззрения', source: 'dndsu',
+      ac: '12', hp: { avg: 2, formula: '1к4' }, speed: '40 фт., лазание 30 фт.',
+      abilities: { str: A(3,-4), dex: A(15,2), con: A(10,0), int: A(3,-4), wis: A(12,1), cha: A(7,-2) },
+      skills: 'Восприятие +3, Скрытность +4',
+      senses: 'пассивное Восприятие 13', languages: '—', cr: '0 (10 опыта)',
+      traits: [
+        { name: 'Острый нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на обонянии.' },
+        { name: 'Острый слух', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на слухе.' }
+      ],
+      actions: [{ name: 'Когти', text: 'Рукопашная атака оружием.', toHit: 0, reach: '5 фт., одна цель', damage: [{ formula: '1', type: 'рубящий' }] }]
+    },
+    flyingsword: {
+      name: 'Летающий меч', type: 'Маленький конструкт, без мировоззрения', source: 'dndsu',
+      ac: '17', hp: { avg: 17, formula: '5к8-5' }, speed: '0 фт., полёт 50 фт. (парение)',
+      abilities: { str: A(12,1), dex: A(15,2), con: A(9,-1), int: A(1,-5), wis: A(5,-3), cha: A(1,-5) },
+      immunities: 'яд, психический', condImmunities: 'ослеплённый, очарованный, оглохший, испуганный, парализованный, окаменевший, отравленный',
+      senses: 'слепое зрение 60 фт. (слеп дальше), пассивное Восприятие 7', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [
+        { name: 'Восприимчивость к антимагии', text: 'Выводится из строя в поле антимагии; при рассеивании магии — спасбросок Телосложения или без сознания 1 минуту.' },
+        { name: 'Обманчивая внешность', text: 'Пока меч без движения, неотличим от обычного меча.' }
+      ],
+      actions: [{ name: 'Длинный меч', text: 'Рукопашная атака оружием (1d10+1 при двуручном хвате).', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d8+1', type: 'рубящий' }] }]
+    },
+    crawlingclaw: {
+      name: 'Ползающая рука', type: 'Крошечная нежить, без мировоззрения', source: 'dndsu',
+      ac: '12', hp: { avg: 2, formula: '1к4' }, speed: '20 фт., лазание 20 фт.',
+      abilities: { str: A(13,1), dex: A(16,3), con: A(12,1), int: A(1,-5), wis: A(10,0), cha: A(1,-5) },
+      immunities: 'яд, психический', condImmunities: 'ослеплённый, очарованный, оглохший, испуганный, парализованный, окаменевший, отравленный',
+      senses: 'слепое зрение 30 фт. (слеп дальше), пассивное Восприятие 10', languages: '—', cr: '0 (10 опыта)',
+      traits: [{ name: 'Острый нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на обонянии.' }],
+      actions: [{ name: 'Коготь', text: 'Рукопашная атака оружием. Если цель Маленького или большего размера, рука вцепляется в неё: пока не снята (действие, Сл 12 Силы), урона не наносит, но цель получает 1 колющего урона в начале каждого своего хода.', toHit: 5, reach: '5 фт., одно существо', damage: [{ formula: '1', type: 'колющий' }] }]
+    },
+    shadow: {
+      name: 'Тень', type: 'Средняя нежить, хаотично-злое', source: 'dndsu',
+      ac: '12', hp: { avg: 16, formula: '3к8+3' }, speed: '40 фт.',
+      abilities: { str: A(6,-2), dex: A(14,2), con: A(13,1), int: A(6,-2), wis: A(10,0), cha: A(8,-1) },
+      skills: 'Скрытность +4 (+6 в тусклом свете/темноте)',
+      vulnerabilities: 'излучение',
+      resistances: 'кислота, холод, огонь, электричество, гром; дробящий/колющий/рубящий от немагических атак',
+      immunities: 'некротический, яд',
+      condImmunities: 'истощение, испуганный, схваченный, парализованный, окаменевший, отравленный, сбитый с ног, обездвиженный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 10', languages: '—', cr: '1/2 (100 опыта)',
+      traits: [
+        { name: 'Аморфность', text: 'Может протискиваться через щели шириной от 1 дюйма без затруднений.' },
+        { name: 'Скрытность тени', text: 'В тусклом свете или темноте может действием стать невидимой.' },
+        { name: 'Уязвимость к солнечному свету', text: 'С помехой на атаки и проверки Восприятия, основанные на зрении, находясь под солнечным светом.' }
+      ],
+      actions: [{ name: 'Иссушение Силы', text: 'Рукопашная атака оружием. Цель проходит спасбросок Силы (не указан явно) или её Сила снижается на 1к4 (мин. 1); при 0 Силы — цель умирает и становится тенью. Тень восстанавливает хиты, равные снижению.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '2d6+2', type: 'некротический' }] }]
+    },
+    thug: {
+      name: 'Головорез', type: 'Средний гуманоид (любой), любое неблагое мировоззрение', source: 'dndsu',
+      ac: '11 (12 в кожаном доспехе)', hp: { avg: 32, formula: '5к8+10' }, speed: '30 фт.',
+      abilities: { str: A(15,2), dex: A(11,0), con: A(14,2), int: A(10,0), wis: A(10,0), cha: A(11,0) },
+      skills: 'Запугивание +2', senses: 'пассивное Восприятие 10', languages: 'любой один язык', cr: '1/2 (100 опыта)',
+      traits: [{ name: 'Тактика стаи', text: 'Преимущество на бросок атаки по существу, если хотя бы один союзник рядом с целью и не выведен из строя.' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки булавой.', toHit: null, damage: [] },
+        { name: 'Булава', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+2', type: 'дробящий' }] },
+        { name: 'Тяжёлый арбалет', text: 'Дальнобойная атака оружием.', toHit: 2, reach: 'дистанция 100/400 фт., одна цель', damage: [{ formula: '1d10', type: 'колющий' }] }
+      ]
+    },
+    wight: {
+      name: 'Умертвие', type: 'Среднее нежить, нейтрально-злое', source: 'dndsu',
+      ac: '14 (клёпаный кожаный доспех)', hp: { avg: 45, formula: '6к8+18' }, speed: '30 фт.',
+      abilities: { str: A(15,2), dex: A(14,2), con: A(16,3), int: A(10,0), wis: A(13,1), cha: A(15,2) },
+      skills: 'Восприятие +3, Скрытность +4',
+      resistances: 'некротический; дробящий/колющий/рубящий от немагических атак',
+      immunities: 'яд', condImmunities: 'истощение, отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 13', languages: 'любой известный при жизни', cr: '3 (700 опыта)',
+      traits: [{ name: 'Чувствительность к солнцу', text: 'С помехой на атаки и Восприятие (зрение) под солнечным светом.' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки, только одна может быть Иссушением жизни.', toHit: null, damage: [] },
+        { name: 'Длинный меч', text: 'Рукопашная атака оружием (1d10+2 двуручным хватом).', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d8+2', type: 'рубящий' }] },
+        { name: 'Длинный лук', text: 'Дальнобойная атака оружием.', toHit: 3, reach: 'дистанция 150/600 фт., одна цель', damage: [{ formula: '1d8+1', type: 'колющий' }] },
+        { name: 'Иссушение жизни', text: 'Рукопашная атака оружием. Цель — спасбросок Телосложения Сл 13, иначе её максимум хитов снижается на величину урона (до конца продолжительного отдыха); умертвие восстанавливает столько же хитов. Гуманоид, умерший так и похороненный, восстаёт зомби под контролем умертвия через 24 часа.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+3', type: 'некротический' }] }
+      ]
+    },
+    vampirespawn: {
+      name: 'Порождение вампира', type: 'Среднее нежить, нейтрально-злое', source: 'dndsu',
+      ac: '15 (естественный доспех)', hp: { avg: 82, formula: '11к8+33' }, speed: '30 фт., лазание 30 фт.',
+      abilities: { str: A(16,3), dex: A(16,3), con: A(16,3), int: A(11,0), wis: A(10,0), cha: A(12,1) },
+      skills: 'Восприятие +2, Скрытность +6',
+      resistances: 'некротический; дробящий/колющий/рубящий от немагических атак',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 12',
+      languages: 'Общий плюс известные при жизни', cr: '5 (1800 опыта)',
+      traits: [
+        { name: 'Регенерация', text: 'Восстанавливает 10 хитов в начале хода, если есть хотя бы 1 хит; не действует, если получен урон излучением или святой водой с прошлого хода.' },
+        { name: 'Паучье лазание', text: 'Может лазать по сложным поверхностям, включая потолки, без проверок.' },
+        { name: 'Слабости вампира', text: 'Как у Страда (запрет входа без приглашения, урон от текущей воды, кол в сердце, чувствительность к солнцу) — см. чарник Страда.' }
+      ],
+      actions: [
+        { name: 'Мультиатака', text: 'Две атаки, только одна может быть Укусом.', toHit: null, damage: [] },
+        { name: 'Когти', text: 'Рукопашная атака оружием (10/2d6+3 при захвате).', toHit: 6, reach: '5 фт., одна цель', damage: [{ formula: '2d4+3', type: 'рубящий' }] },
+        { name: 'Укус', text: 'Только по согласной, схваченной, недееспособной или обездвиженной цели. Максимум хитов цели снижается на величину некротического урона; порождение получает столько же временных хитов. Гуманоид, умерший так и похороненный, восстаёт порождением вампира через 24 часа.', toHit: 6, reach: '5 фт., одно существо', damage: [{ formula: '1d6+3', type: 'колющий' }, { formula: '3d6', type: 'некротический' }] }
+      ]
+    },
+    skeleton: {
+      name: 'Скелет', type: 'Средняя нежить, законно-злое', source: 'dndsu',
+      ac: '13 (обрывки доспеха)', hp: { avg: 13, formula: '2к8+4' }, speed: '30 фт.',
+      abilities: { str: A(10,0), dex: A(14,2), con: A(15,2), int: A(6,-2), wis: A(8,-1), cha: A(5,-3) },
+      vulnerabilities: 'дробящий', immunities: 'яд', condImmunities: 'истощение, отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 9',
+      languages: 'понимает языки, известные при жизни, но не говорит', cr: '1/4 (50 опыта)',
+      traits: [],
+      actions: [
+        { name: 'Короткий меч', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+2', type: 'колющий' }] },
+        { name: 'Короткий лук', text: 'Дальнобойная атака оружием.', toHit: 4, reach: 'дистанция 80/320 фт., одна цель', damage: [{ formula: '1d6+2', type: 'колющий' }] }
+      ]
+    },
+    swarmrats: {
+      name: 'Рой крыс', type: 'Средний рой Крошечных зверей, без мировоззрения', source: 'dndsu',
+      ac: '10', hp: { avg: 24, formula: '7к8-7' }, speed: '30 фт.',
+      abilities: { str: A(9,-1), dex: A(11,0), con: A(9,-1), int: A(2,-4), wis: A(10,0), cha: A(3,-4) },
+      resistances: 'дробящий, колющий, рубящий',
+      condImmunities: 'очарованный, испуганный, схваченный, парализованный, окаменевший, сбитый с ног, обездвиженный, ошеломлённый',
+      senses: 'тёмное зрение 30 фт., пассивное Восприятие 10', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [
+        { name: 'Острый нюх', text: 'Преимущество на проверки Мудрости (Восприятие), основанные на обонянии.' },
+        { name: 'Рой', text: 'Может занимать пространство другого существа; урон уменьшается вдвое при половине хитов роя.' }
+      ],
+      actions: [{ name: 'Укусы', text: 'Атака кучей укусов по цели в пространстве роя.', toHit: 2, reach: '0 фт., одна цель в пространстве роя', damage: [{ formula: '2d6', type: 'колющий' }] }]
+    },
+    swarmravens: {
+      name: 'Рой воронов', type: 'Средний рой Крошечных зверей, без мировоззрения', source: 'dndsu',
+      ac: '12', hp: { avg: 24, formula: '7к8-7' }, speed: '10 фт., полёт 50 фт.',
+      abilities: { str: A(6,-2), dex: A(14,2), con: A(8,-1), int: A(3,-4), wis: A(12,1), cha: A(6,-2) },
+      skills: 'Восприятие +3',
+      resistances: 'дробящий, колющий, рубящий',
+      condImmunities: 'очарованный, испуганный, схваченный, парализованный, окаменевший, сбитый с ног, обездвиженный, ошеломлённый',
+      senses: 'пассивное Восприятие 13', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [{ name: 'Рой', text: 'Может занимать пространство другого существа; урон уменьшается вдвое при половине хитов роя.' }],
+      actions: [{ name: 'Клювы', text: 'Атака кучей клювов по цели в пространстве роя.', toHit: 4, reach: '0 фт., одна цель в пространстве роя', damage: [{ formula: '2d6', type: 'колющий' }] }]
+    },
+    swarminsects: {
+      name: 'Рой насекомых (заменяет рой пауков)', type: 'Средний рой Крошечных зверей, без мировоззрения', source: 'dndsu',
+      ac: '12', hp: { avg: 22, formula: '5к8' }, speed: '20 фт., лазание 20 фт.',
+      abilities: { str: A(3,-4), dex: A(13,1), con: A(10,0), int: A(1,-5), wis: A(7,-2), cha: A(1,-5) },
+      resistances: 'дробящий, колющий, рубящий', immunities: 'яд',
+      condImmunities: 'очарованный, испуганный, схваченный, парализованный, окаменевший, отравленный, сбитый с ног, обездвиженный, ошеломлённый',
+      senses: 'слепое зрение 10 фт., пассивное Восприятие 8', languages: '—', cr: '1/2 (100 опыта)',
+      traits: [{ name: 'Рой', text: 'Может занимать пространство другого существа; урон уменьшается вдвое при половине хитов роя.' }],
+      actions: [{ name: 'Укусы', text: 'Атака кучей укусов по цели в пространстве роя.', toHit: 3, reach: '0 фт., одна цель в пространстве роя', damage: [{ formula: '4d4', type: 'колющий' }] }],
+      note: 'В книге результат описан как «рой гигантских пауков» — отдельного чарника для роя пауков в бестиарии нет, ближайший аналог по механике — рой насекомых.'
+    },
+    cultist: {
+      name: 'Культист', type: 'Средний гуманоид (любой), любое неблагое мировоззрение', source: 'dndsu',
+      ac: '12 (кожаный доспех)', hp: { avg: 9, formula: '2к8' }, speed: '30 фт.',
+      abilities: { str: A(11,0), dex: A(12,1), con: A(10,0), int: A(10,0), wis: A(11,0), cha: A(10,0) },
+      skills: 'Обман +2, Религия +2', senses: 'пассивное Восприятие 10', languages: 'любой один язык', cr: '1/8 (25 опыта)',
+      traits: [{ name: 'Тёмная преданность', text: 'Преимущество на спасброски против очарования и испуга.' }],
+      actions: [{ name: 'Ятаган', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d6+1', type: 'рубящий' }] }]
+    },
+
+    // ---- Уникальные НИП книги, Приложение D «Монстры и НИП» (source: book, дословно) ----
+
+    barovianwitch: {
+      name: 'Баровийская ведьма', type: 'Средний гуманоид (человек), хаотично-злое', source: 'book',
+      ac: '10', hp: { avg: 16, formula: '3к8+3' }, speed: '30 фт.',
+      abilities: { str: A(7,-2), dex: A(11,0), con: A(13,1), int: A(14,2), wis: A(11,0), cha: A(12,1) },
+      skills: 'Магия +4, Восприятие +2',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 12', languages: 'Общий', cr: '1/2 (100 опыта)',
+      traits: [{ name: 'Использование заклинаний', text: 'Заклинатель 3 уровня (Интеллект, Сл спасброска 12, +4 к попаданию). Заговоры (неогр.): волшебная рука, фокусы, луч холода. 1-й ур. (4 ячейки): луч болезни, усыпление, Жуткий смех Таши. 2-й ур. (2 ячейки): смена обличья, невидимость.' }],
+      actions: [
+        { name: 'Когти (требует смены обличья)', text: 'Рукопашная атака оружием. Атака считается магической.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d6+1', type: 'рубящий' }] },
+        { name: 'Кинжал', text: 'Рукопашная или дальнобойная атака оружием.', toHit: 2, reach: '5 фт. или дистанция 20/60 фт., одна цель', damage: [{ formula: '1d4', type: 'колющий' }] }
+      ]
+    },
+
+    wereraven: {
+      name: 'Верворон', type: 'Средний гуманоид (человек, перевёртыш), законно-добрый', source: 'book',
+      ac: '12', hp: { avg: 31, formula: '7к8' }, speed: '30 фт. (полёт 50 фт. в облике ворона/гибрида)',
+      abilities: { str: A(10,0), dex: A(15,2), con: A(11,0), int: A(13,1), wis: A(15,2), cha: A(14,2) },
+      skills: 'Проницательность +4, Внимательность +6',
+      immunities: 'дробящий, колющий, рубящий урон от немагических атак и оружия, не посеребрённого',
+      senses: 'пассивная Внимательность 16', languages: 'Общий (не может говорить в облике ворона)', cr: '2 (450 опыта)',
+      traits: [
+        { name: 'Перевёртыш', text: 'Действием превращается в ворона, гибрид ворона и гуманоида, либо принимает истинный гуманоидный облик.' },
+        { name: 'Подражание', text: 'Может подражать звукам, которые слышал; проверка Мудрости (Проницательность) Сл 10 распознаёт подделку.' }
+      ],
+      actions: [
+        { name: 'Мультиатака (гуманоид/гибрид)', text: 'Две атаки оружием, только одна может быть ручным арбалетом.', toHit: null, damage: [] },
+        { name: 'Укус (ворон/гибрид)', text: 'Рукопашная атака оружием. Гуманоид, получивший урон, — спасбросок Телосложения Сл 10, иначе проклят ликантропией верворона.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d4+2', type: 'колющий' }] },
+        { name: 'Короткий меч (гуманоид/гибрид)', text: 'Рукопашная атака оружием.', toHit: 4, reach: '5 фт., одна цель', damage: [{ formula: '1d6+2', type: 'колющий' }] },
+        { name: 'Ручной арбалет (гуманоид/гибрид)', text: 'Дальнобойная атака оружием.', toHit: 4, reach: 'дистанция 30/120 фт., одна цель', damage: [{ formula: '1d6+2', type: 'колющий' }] }
+      ]
+    },
+
+    strahdzombie: {
+      name: 'Зомби Страда', type: 'Средняя нежить, без мировоззрения', source: 'book',
+      ac: '8', hp: { avg: 30, formula: '4к8+12' }, speed: '20 фт.',
+      abilities: { str: A(13,1), dex: A(6,-2), con: A(16,3), int: A(3,-4), wis: A(6,-2), cha: A(5,-3) },
+      saves: 'Мдр +0', immunities: 'яд', condImmunities: 'отравленный',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 8',
+      languages: 'понимает язык, известный при жизни, но не говорит', cr: '1 (200 опыта)',
+      traits: [{ name: 'Отвратительные конечности', text: 'При получении за раз ≥5 дробящего/режущего урона — бросок к20: 1–8 теряет ногу, 9–16 теряет руку, 17–20 обезглавлен. Части имеют КД 8, урон по ним вычитается из хитов зомби; при 0 хитов все части погибают. Отрезанные части сохраняют своё действие и влияют на инициативу, но со сниженной эффективностью (см. книгу).' }],
+      actions: [
+        { name: 'Мультиатака', text: 'Три атаки: одна укусом и две когтями.', toHit: null, damage: [] },
+        { name: 'Укус', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d4+1', type: 'колющий' }] },
+        { name: 'Когти', text: 'Рукопашная атака оружием.', toHit: 3, reach: '5 фт., одна цель', damage: [{ formula: '1d6+1', type: 'рубящий' }] }
+      ]
+    },
+
+    broom: {
+      name: 'Живая метла атаки', type: 'Маленький конструкт, без мировоззрения', source: 'book',
+      ac: '15 (естественный доспех)', hp: { avg: 17, formula: '5к6' }, speed: '0 фт., полёт 50 фт. (парение)',
+      abilities: { str: A(10,0), dex: A(17,3), con: A(10,0), int: A(1,-5), wis: A(5,-3), cha: A(1,-5) },
+      immunities: 'яд, психический',
+      condImmunities: 'ослеплённый, очарованный, оглохший, истощение, испуганный, парализованный, окаменевший, отравленный, сбитый с ног',
+      senses: 'слепое зрение 30 фт. (слеп дальше), пассивное Восприятие 7', languages: '—', cr: '1/4 (50 опыта)',
+      traits: [
+        { name: 'Восприимчивость к антимагии', text: 'Выведена из строя в поле антимагии; при рассеивании магии — спасбросок Телосложения или без сознания 1 минуту.' },
+        { name: 'Обманчивая внешность', text: 'Пока метла не движется и не летает, её не отличить от обычной метлы.' }
+      ],
+      actions: [
+        { name: 'Мультиатака', text: 'Две рукопашные атаки.', toHit: null, damage: [] },
+        { name: 'Рукоятка', text: 'Рукопашная атака оружием.', toHit: 5, reach: '5 фт., одна цель', damage: [{ formula: '1d4+3', type: 'дробящий' }] }
+      ],
+      reactions: [{ name: 'Оживлённая атака', text: 'Если метла оставалась без движения и существо хватается за неё — противостояние проверок Ловкости и Силы; при победе метла вырывается и атакует это существо с преимуществом.' }]
+    },
+
+    rahadin: {
+      name: 'Рахадин', type: 'Средний гуманоид (эльф), законно-злое', source: 'book',
+      ac: '18 (проклёпанный кожаный доспех)', hp: { avg: 135, formula: '18к8+54' }, speed: '35 фт.',
+      abilities: { str: A(14,2), dex: A(22,6), con: A(17,3), int: A(15,2), wis: A(16,3), cha: A(18,4) },
+      saves: 'Тел +7, Мдр +7',
+      skills: 'Обман +8, Проницательность +7, Запугивание +12, Восприятие +11, Скрытность +14',
+      senses: 'тёмное зрение 60 фт., пассивное Восприятие 21', languages: 'Общий, Эльфийский', cr: '10 (5900 опыта)',
+      traits: [
+        { name: 'Хор Мёртвых', text: 'Существа в 10 фт. от Рахадина (без сокрытия разума) слышат голоса убитых им людей. Бонусным действием Рахадин заставляет их пройти спасбросок Мудрости Сл 16: 16 (3к10) психического урона при провале, половина при успехе.' },
+        { name: 'Наследие фей', text: 'Преимущество на спасброски от очарования; невозможно усыпить магическим образом.' },
+        { name: 'Врождённое колдовство', text: 'Основано на Интеллекте, без компонентов. 3/день: туманный шаг, призрачный скакун. 1/день: магическое оружие, необнаружимость.' },
+        { name: 'Маскировка в дикой местности', text: 'Может прятаться при слабом заслонении листвой, дождём, снегопадом, туманом и другими явлениями природы.' }
+      ],
+      actions: [
+        { name: 'Мультиатака', text: 'Три атаки скимитаром или две отравленными дротиками.', toHit: null, damage: [] },
+        { name: 'Скимитар', text: 'Рукопашная атака оружием.', toHit: 10, reach: '5 фт., одна цель', damage: [{ formula: '1d6+6', type: 'рубящий' }] },
+        { name: 'Отравленный дротик', text: 'Дальнобойная атака оружием.', toHit: 10, reach: 'дистанция 20/60 фт., одна цель', damage: [{ formula: '1d4+6', type: 'колющий' }, { formula: '2d4', type: 'яд' }] }
+      ]
+    },
+
+    ezmerelda: {
+      name: 'Эсмеральда Д’Авенир', type: 'Средний гуманоид (человек), хаотично-добрый', source: 'book',
+      ac: '17 (+1 проклёпанный кожаный доспех)', hp: { avg: 82, formula: '11к8+33' }, speed: '30 фт.',
+      abilities: { str: A(14,2), dex: A(19,4), con: A(16,3), int: A(16,3), wis: A(11,0), cha: A(17,3) },
+      saves: 'Мдр +3',
+      skills: 'Акробатика +7, Магия +6, Медицина +3, Обман +9, Проницательность +3, Восприятие +6, Выступление +6, Ловкость рук +7, Скрытность +7, Выживание +6',
+      senses: 'пассивное Восприятие 16', languages: 'Общий, Эльфийский', cr: '8 (3900 опыта)',
+      traits: [
+        { name: 'Специальное снаряжение', text: 'Помимо магических брони и оружия — два зелья великого исцеления, шесть фиалов святой воды и три деревянных кола.' },
+        { name: 'Использование заклинаний', text: 'Заклинатель 7 уровня (Интеллект, Сл спасброска 14, +6 к попаданию). Заговоры (неогр.): огненный снаряд, свет, волшебная рука, фокусы. 1-й ур. (4): защита от добра и зла, волшебная стрела, щит. 2-й ур. (3): тёмное зрение, открывание, отражения. 3-й ур. (3): подсматривание, молния, магический круг. 4-й ур. (1): высшая невидимость.' }
+      ],
+      actions: [
+        { name: 'Мультиатака', text: 'Три атаки: две +1 рапирой и одна +1 ручным топором или серебрёным коротким мечом.', toHit: null, damage: [] },
+        { name: '+1 Рапира', text: 'Рукопашная атака оружием.', toHit: 8, reach: '5 фт., одна цель', damage: [{ formula: '1d8+5', type: 'колющий' }] },
+        { name: '+1 Ручной топор', text: 'Рукопашная или дальнобойная атака оружием.', toHit: 6, reach: '5 фт. или дистанция 20/60 фт., одна цель', damage: [{ formula: '1d6+3', type: 'рубящий' }] },
+        { name: 'Серебрёный короткий меч', text: 'Рукопашная атака оружием.', toHit: 7, reach: '5 фт., одна цель', damage: [{ formula: '1d6+4', type: 'колющий' }] },
+        { name: 'Проклятие (после длинного отдыха)', text: 'Цель в 30 фт. — спасбросок Мудрости Сл 14 или получает уязвимость к урону по выбору Эсмеральды, пока проклятие не снято.', toHit: null, damage: [] },
+        { name: 'Сглаз (после короткого/длинного отдыха)', text: 'Цель в 10 фт. — одно из: дружба с животными, очарование личности, удержание личности (Сл 14), без компонентов.', toHit: null, damage: [] }
+      ]
+    },
+
+    strahd: {
+      name: 'Страд фон Зарович', type: 'Средняя нежить (перевёртыш), законно-злое', source: 'book',
+      ac: '16 (естественный доспех)', hp: { avg: 144, formula: '17к8+68' }, speed: '30 фт.',
+      abilities: { str: A(18,4), dex: A(18,4), con: A(18,4), int: A(20,5), wis: A(15,2), cha: A(18,4) },
+      saves: 'Лов +9, Мдр +7, Хар +9',
+      skills: 'Магия +15, Восприятие +12, Религия +10, Скрытность +14',
+      resistances: 'некротический; дробящий, колющий, рубящий от немагических атак',
+      senses: 'тёмное зрение 120 фт., пассивное Восприятие 22',
+      languages: 'Бездны, Общий, Драконий, Эльфийский, Язык гигантов, Инфернальный', cr: '15 (13000 опыта)',
+      traits: [
+        { name: 'Перевёртыш', text: 'Вне солнечного света и текущей воды действием превращается в крошечную летучую мышь, среднего волка, среднее облако тумана или истинный облик.' },
+        { name: 'Легендарное сопротивление (3/день)', text: 'Проваленный спасбросок может быть сделан успешным.' },
+        { name: 'Туманный побег', text: 'При падении хитов до 0 вне места отдыха превращается в туман (если не под солнцем/в текущей воде) и должен вернуться в место отдыха за 2 часа, иначе уничтожается.' },
+        { name: 'Регенерация', text: 'Восстанавливает 20 хитов в начале хода, если есть хотя бы 1 хит и он не на солнце/в текущей воде; не действует после урона излучением или святой водой.' },
+        { name: 'Использование заклинаний', text: 'Заклинатель 9 уровня (Интеллект, Сл спасброска 18, +10 к попаданию). Заговоры: волшебная рука, фокусы, луч холода. 1-й (4): понимание языков, туманное облако, усыпление. 2-й (3): обнаружение мыслей, порыв ветра, отражения. 3-й (3): восставший труп, огненный шар, необнаружимость. 4-й (3): усыхание, высшая невидимость, превращение. 5-й (1): оживление вещей, наблюдение.' },
+        { name: 'Паучье лазание', text: 'Лазает по сложным поверхностям, включая потолки, без проверок.' },
+        { name: 'Слабости вампира', text: 'Запрет (не входит в жилище без приглашения), урон кислотой 20 от текущей воды, парализуется колом в сердце в месте отдыха, урон излучением 20 и помеха на атаки/проверки под солнцем.' }
+      ],
+      actions: [
+        { name: 'Мультиатака (облик вампира)', text: 'Две атаки, только одна может быть Укусом.', toHit: null, damage: [] },
+        { name: 'Безоружный удар (вампир/волк)', text: 'Рукопашная атака оружием. Вместо урона может схватить цель (Сл высвобождения 18).', toHit: 9, reach: '5 фт., одна цель', damage: [{ formula: '1d8+4', type: 'режущий' }, { formula: '4d6', type: 'некротический' }] },
+        { name: 'Укус', text: 'Только по согласному/схваченному/недееспособному/опутанному существу. Максимум хитов цели снижается на величину некротического урона (до конца продолжительного отдыха цели); Страд восстанавливает столько же хитов. Гуманоид, умерший так и похороненный, восстаёт порождением вампира.', toHit: 9, reach: '5 фт., одно существо', damage: [{ formula: '1d6+4', type: 'колющий' }, { formula: '3d6', type: 'некротический' }] },
+        { name: 'Очарование', text: 'Один видящий Страда гуманоид в 30 фт. — спасбросок Мудрости Сл 17 или очарован (длится 24 часа либо до особых условий).', toHit: null, damage: [] },
+        { name: 'Дети ночи (1/день)', text: 'Призывает 2к4 роёв крыс или летучих мышей (ночью) либо 3к6 волков (на открытом воздухе). Прибывают за 1к4 раунда, действуют как союзники.', toHit: null, damage: [] }
+      ],
+      legendary: [
+        { name: 'Перемещение', text: 'Страд перемещается на расстояние не больше своей скорости, не провоцируя атаки.' },
+        { name: 'Безоружный удар', text: 'Страд совершает один безоружный удар.' },
+        { name: 'Укус (стоит 2 действия)', text: 'Страд совершает одну атаку укусом.' }
+      ]
+    }
+  };
+
+  var TAG_TO_KEY = {
+    'commoner': 'commoner', 'scout': 'scout', 'bandit': 'bandit',
+    'swarm of ravens': 'swarmravens', 'wereraven': 'wereraven',
+    'dire wolf': 'direwolf', 'wolf': 'wolf', 'berserker': 'berserker', 'werewolf': 'werewolf',
+    'druid': 'druid', 'twig blight': 'twigblight', 'needle blight': 'needleblight',
+    'scarecrow': 'scarecrow', 'revenant': 'revenant', 'ghost': 'ghost',
+    'swarm of bats': 'swarmbats', 'zombie': 'zombie', 'strahd zombie': 'strahdzombie',
+    "will-o'-wisp": 'willowisp', 'cat': 'cat', 'broom of animated attack': 'broom',
+    'flying sword': 'flyingsword', 'crawling claw': 'crawlingclaw', 'shadow': 'shadow',
+    'thug': 'thug', 'wight': 'wight', 'barovian witch': 'barovianwitch',
+    'vampire spawn': 'vampirespawn', 'skeleton': 'skeleton', 'ezmerelda': 'ezmerelda',
+    'rahadin': 'rahadin', 'strahd': 'strahd', 'swarm of insects': 'swarminsects',
+    'cultist': 'cultist', 'swarm of rats': 'swarmrats'
+  };
+
+  function normalizeTag(s) {
+    return s.toLowerCase().trim().replace(/[’‘`]/g, "'");
+  }
+
+  // ---------- Партия: заметки МП по игрокам ----------
+  // Раздел «Как его видит Страд» — авторская интерпретация МП (не факт из книги и не то,
+  // что говорил игрок), написана на основе предыстории персонажа и известного характера Страда.
+  // Всё остальное — то, что рассказал сам игрок (иногда слегка причёсано для читаемости).
+
+  var PLAYERS = {
+    fey: {
+      name: 'Фей', tag: 'Полуэльф · Чародей · 5 уровень',
+      concept: 'Бог обмана и подделок Вейр, проживающий третью смертную жизнь в теле девушки — чтобы доказать, что снова достоин быть божеством.',
+      traits: 'Прямолинейная, немного высокомерная.',
+      strengths: null,
+      weaknesses: null,
+      strahdView: 'Страд — сам мастер представления и многовековой манипулятор — почти наверняка почувствует, ' +
+        'что с этой «чародейкой» что-то не сходится: её магия ощущается не как унаследованный дар или заключённый ' +
+        'договор, а как нечто древнее и насквозь пропитанное обманом. Это может вызвать у него нечто вроде ' +
+        'уважения — он ценит мастерство лжи и театра, а тут перед ним, возможно, лжец древнее его самого. Но ' +
+        'одновременно Страд ревностно относится к Баровии как к своей личной сцене и своему проклятию — и вряд ли ' +
+        'обрадуется, узнав, что скучающее божество разыгрывает здесь собственную игру на территории, которая и без ' +
+        'того уже является чужой игрушкой (Тёмных Сил). Скорее всего, он будет прощупывать Фей исподволь — беседой, ' +
+        'иллюзиями, ловушками на слово — а не просто нападать, желая понять, с кем/чем действительно имеет дело.',
+      hooks: [
+        'Пари с Матерью Ночью: Вейр обязан дожить смертным до 20 уровня, иначе (в третий раз) просто умрёт и вернётся в своё божественное тело — а Мать Ночь получит доказательство своей правоты.',
+        'Если Вейр выиграет пари — Мать Ночь обещала помочь ему расширить культ на Рейвенлофт (потенциальный крупный сюжетный рычаг на поздних уровнях).',
+        'Фей буквально выдумывает свою личную историю на ходу, «чтобы подлизаться к союзникам» — то, что она рассказывает о себе партии, не обязательно совпадает с тем, что знает игрок/МП.'
+      ],
+      backstory: [
+        'Основа личности персонажа — древний бог обмана и подделок по имени Вейр. Он начинал как самозванец: человек, ' +
+          'выдававший себя за жреца богини Лейры (богини обмана и иллюзий) в разных городах под разными именами. Когда ' +
+          'Лейра погибла, Вейр скрыл эту новость и постепенно подменил её культ собой — подкупал «свидетелей чудес», ' +
+          'подделывал реликвии, пока второе поколение последователей уже не знало другого бога, кроме него. Поначалу ' +
+          'даже его магическую силу подделывали жрецы-чародеи и волшебники — но со временем в нём действительно ' +
+          'проснулась божественная искра, и обман стал правдой: Вейр по-настоящему стал богом.',
+        'Разжившись божественностью, Вейр заскучал — обманывать стало некого, все и так верили. Он отправился ' +
+          'путешествовать по Внешним Планам, набрался высокомерия среди других богов, изредка спускаясь в свои церкви ' +
+          'под видом нового последователя. Когда среди адептов начали появляться лже-Вейры, пытавшиеся повторить его ' +
+          'же трюк, он лично истребил самых заметных из них, обставив убийства как самоубийства, и подправил ' +
+          '«догматы»: настоящий Вейр никогда не явится открыто, но всегда наблюдает.',
+        'Скука и уязвлённое самолюбие привели его к спору с Матерью Ночью. Та заявила, что Вейр давно оторвался от ' +
+          'всего человеческого и, стань он снова смертным, никогда бы не заслужил божественности заново. Задетый за ' +
+          'живое, Вейр заключил пари: прожить смертным, пока не наберёт 20 уровень (то есть вновь не станет достоин ' +
+          'божественности сам, своими силами) — а если умрёт раньше, вернётся в своё божественное тело. Взамен, если ' +
+          'он выиграет, Мать Ночь поможет ему расширить культ на Рейвенлофт.',
+        'Вейр уже дважды умирал в этом пари, каждый раз подтверждая правоту Матери Ночи. Третья попытка — это Фей: ' +
+          'девушка, которой Вейр буквально придумывает предысторию на ходу, «чтобы лучше подлизаться к возможным ' +
+          'союзникам и точно угодить им». То есть даже история, которую слышит партия от самой Фей, может быть ' +
+          'очередной ложью бога обмана внутри неё.'
+      ]
+    },
+
+    morgan: {
+      name: 'Морган', tag: 'Человек · Жрец (Селунэ) · 5 уровень',
+      concept: 'Ясновидящий жрец Селунэ, чьи вещие сны с детства показывают то, что ещё можно изменить.',
+      traits: 'Добрый, открытый; миротворец по натуре.',
+      strengths: 'Эмпатия, дипломатичность, целительский дар, пророческая интуиция (предчувствует опасность или лживость человека без видимой причины).',
+      weaknesses: 'Предположительно — склонность взваливать на себя чужую боль и чувство вины за будущее, которое не успел изменить; возможно, излишняя доверчивость. (Вывод из предыстории — уточните у игрока, если что-то не так.)',
+      strahdView: 'Страд сам пропитан лунным светом и ночью — а тут перед ним жрец лунной богини, чьи сны показывают, ' +
+        'что будущее не предопределено. Это может задеть Страда за живое сильнее, чем кажется: вся его личная трагедия ' +
+        '— это застывший, повторяющийся цикл (Татьяна–Ирина), из которого он отчаянно хочет и одновременно боится ' +
+        'вырваться. Морган для него — одновременно живая угроза (вдруг увидит во сне его конец или раскроет его игру ' +
+        'с Ириной) и почти болезненная надежда (вдруг существует способ изменить судьбу). Страд, скорее всего, ' +
+        'отнесётся к вере Моргана с необычным для себя уважением, а не с презрением — и может попытаться либо ' +
+        'выведать через шпионов, что снилось Моргану в последнее время, либо, в редкую минуту откровенности, ' +
+        'поговорить с ним напрямую о природе рока.',
+      hooks: [
+        'Последнее видение перед началом кампании — роскошный бал, за которым скрывается нечто зловещее; именно на такой бал (приглашение для семьи как почётных гостей) и начался путь Моргана как жреца.',
+        'Сны становятся ярче в полнолуние — удобный крючок для сцен видений, синхронизированный с разделом «Погода и луна».',
+        'Аура/глаза Моргана серебрятся в момент опасности — заметная деталь для сцен напряжения, которую могут считать и NPC.'
+      ],
+      backstory: [
+        'Морган родился в состоятельной семье в Верхнем городе Врат Балдура. Отец, Ренат, занимал высокий пост в ' +
+          'Пламенном Кулаке; мать, Мареэль, была целительницей, варившей зелья и снадобья от любого недуга. Оба ' +
+          'окружали сына заботой, но чаще всего Морган хотел одного — чтобы родители понимали друг друга: отец ' +
+          'привык всё контролировать и твёрдо держался своих взглядов, тогда как мягкая и сообразительная Мареэль ' +
+          'смотрела на мир иначе. Постоянное напряжение между ними не сломило Моргана, а укрепило: видя их проблемы, ' +
+          'он решил не умножать жестокость мира и с детства был добрым и открытым, помогая окружающим даже во вред ' +
+          'себе.',
+        'Ещё в детстве ему начали сниться странные сны — первым был раненый незнакомец под огромной серебряной ' +
+          'луной, которого Морган встретил наяву уже на следующий день. Сны стали повторяться, показывая незнакомые ' +
+          'места, людей и события — причём иногда их ещё можно было изменить. Он никому не рассказывал об этом, ' +
+          'опасаясь, что его сочтут странным, но вместе со снами усиливалась и его интуиция: порой он чувствовал ' +
+          'опасность или лживость человека без видимой причины.',
+        'В шестнадцать лет Моргану явилась во сне женщина, окутанная лунным светом, — образы жизни и смерти, ' +
+          'разлуки и воссоединения сменяли друг друга, а луна извивалась в бесконечной метаморфозе фаз. Тогда он ' +
+          'понял главное: будущее не предопределено, оно постоянно меняется. В этот момент он впервые ощутил ' +
+          'присутствие чего-то высшего и начал воспринимать свой дар не как проклятие, а как возможность помогать.',
+        'Не желая становиться воином, Морган обратился к учению Селунэ — не бояться перемен, искать свет даже во ' +
+          'тьме и помогать сбившимся с пути. Параллельно изучал драконий язык и увлёкся древними реликвиями; на ' +
+          'одной из барахолок Нижнего города нашёл амулет Селунэ. Со временем его способности усилились: ' +
+          'прикосновения облегчали боль, молитвы помогали раненым, а в минуты опасности его серые глаза приобретали ' +
+          'серебристый оттенок. Сны при этом оставались непредсказуемыми — ясными, символичными или лишь тревожным ' +
+          'предчувствием, — и особенно яркими становились в полнолуние.',
+        'Несмотря на всё увиденное, Морган сохранил оптимизм и доброту. Последним его видением перед началом ' +
+          'приключений стал роскошный бал, за праздничным обликом которого скрывалось нечто зловещее. Вскоре ему ' +
+          'действительно пришлось отправиться туда вместе с родителями, приглашёнными как почётные гости — и именно ' +
+          'с этого вечера начался его путь жреца.'
+      ]
+    },
+
+    atos: {
+      name: 'Атос', tag: 'Человек · Изобретатель (Артифисер) · 5 уровень',
+      concept: 'Художник-изобретатель из Лаудуотера, чьи магические картины балансируют между вдохновением и одержимостью душами — а теперь ещё заражён вампиризмом.',
+      traits: 'Немного пугливый, не совсем уверенный в себе, но любознательный.',
+      strengths: null,
+      weaknesses: null,
+      strahdView: 'Страд одержим искусством, красотой и собственным наследием — его замок полон портретов, гобеленов ' +
+        'и памяти о Татьяне, застывшей в образах. Артифисер, чьи картины буквально способны удерживать душу момента, ' +
+        'касается самой болезненной струны Страда: его вечной попытки удержать/вернуть утраченную любовь через ' +
+        'повторяющиеся образы. Страд, скорее всего, будет одновременно очарован и по-хозяйски заинтересован в Атосе ' +
+        '— как в инструменте, который можно использовать (заказать или вынудить написать нечто, способное удержать ' +
+        'чью-то душу — пугающе близко к его собственным целям насчёт Ирины), и как в родственной душе, понимающей ' +
+        'соблазн замораживать прекрасное мгновение навсегда. То, что Атос уже тронут вампиризмом, даёт Страду прямой ' +
+        'и личный рычаг: он может предложить «исцеление» как приманку, а на деле медленно подчинять и «улучшать» его ' +
+        'в полноценного слугу-вампира по своему вкусу. Есть и ещё одна параллель, которая Страда не оставит ' +
+        'равнодушным: у самого Атоса есть возлюбленная, укушенная вампиром, ради которой он ищет либо исцеление, ' +
+        'либо смерть/покой, если исцеление невозможно, — почти пародия на многовековую драму самого Страда с ' +
+        'Татьяной/Ириной. Страд может увидеть в этом редкую родственную боль (и на миг проявить неожиданную ' +
+        'человечность или даже помочь — если сочтёт Атоса достойным), либо, наоборот, презрение к тому, кто готов ' +
+        'выбрать для любимой смерть там, где сам Страд без колебаний выбрал вечность любой ценой.',
+      hooks: [
+        'Атос уже заражён вампиризмом (порождение вампира) и прямо заявляет цель вылечиться — а перед этим «протестить на себе все слабости вампиров», что само по себе рискованная затея, которую МП может обыгрывать сценами.',
+        'Утерянный пистолет — вторичная цель («хотя бы не застрелиться» — судя по формулировке самого игрока, деталь стоит уточнить aккуратно, возможно, деликатная тема, если только игрок сам не поднимет её снова).',
+        'Гиперцель: у Атоса была возлюбленная, которую укусил вампир — теперь он ищет способ либо исцелить её от вампиризма, либо принести ей смерть/покой, если исцеление окажется невозможным. Отдельная сюжетная линия от его собственного заражения — готовый крючок: НИП-возлюбленная (её текущее состояние/местонахождение МП может определить по ходу кампании), поиск лекарства от вампиризма как такового.',
+        'Долг: обещал расплатиться картиной за пулю торговцу, который её продал — готовый крючок, чтобы этот торговец вновь возник в кампании.',
+        'Наставник Атоса в живописи по книге не назван (сам игрок пометил «придумать имя») — рабочее имя для НИПа: Кассий Вейл, маг-живописец из Глубоководья, чьи картины буквально живые. Замените, если хотите своё.',
+        'Круг магов-ровесников из Глубоководья, подтолкнувших Атоса к идее заключать в картины души — сам игрок предположил, что это могут быть «Наследники Халастера» (Halaster’s Heirs), но это не подтверждено, просто рабочая версия.'
+      ],
+      backstory: [
+        'Атос родился в Лаудуотере, в семье потомственных ремесленников, ставших торговцами — мастерская была ' +
+          'достаточно велика, чтобы дать семье заметное влияние в городе. У Атоса несколько братьев (один погиб) и ' +
+          'две сестры, с которыми он почти не поддерживает связь. С детства, находясь рядом с мастерской, он ' +
+          'предпочитал не работать руками, а зарисовывать станки, саму мастерскую и мастеров за работой; отца это ' +
+          'скорее забавляло, и в какой-то момент он ради интереса купил сыну холст и краски.',
+        'Лаудуотер полон эльфов, друидов и следопытов — с детства у Атоса сложилось уважение к последователям ' +
+          'Миликки. В тринадцать лет один из друзей семьи, член гильдии писарей Глубоководья, предложил юноше ' +
+          'учиться в гильдии под началом художника-наставника; Атос тогда отказался от испуга, но через два года, ' +
+          'когда предложение повторили, согласился.',
+        'Образование в гильдии писарей дало ему немало знаний. Наставник в живописи (в кампании пока безымянный, ' +
+          'рабочее имя — Кассий Вейл) оказался магом: его картины будто хранили душу момента — на них шелестела ' +
+          'листва, менялись блики солнца на воде. Воспроизвести этот эффект самому Атосу упорно не удавалось, но ' +
+          'наставник не расстраивался, утверждая, что дело в тренировке и умении находить вдохновение.',
+        'За четыре года в Глубоководье Атос нашёл друзей среди местных магов примерно своего возраста (возможно, ' +
+          '«Наследники Халастера» — не подтверждено). Те, будучи где-то между законопослушным нейтралитетом и ' +
+          'нейтральным злом, убедили его, что магия живых картин наставника может пойти дальше — не просто живые ' +
+          'деревья, а заключение в картину настоящих душ, возможно, даже способность видеть будущее. Идея увлекла ' +
+          'Атоса: что если бы он мог видеть будущее через собственные полотна?',
+        'Наставнику идея не понравилась совершенно — он всегда учил Атоса сдержанности в помыслах. В девятнадцать ' +
+          'лет, после особенно ожесточённого спора об этом, наставник фактически выгнал Атоса, отказав ему в ' +
+          'дальнейшем покровительстве — хотя к тому моменту Атос уже мог содержать себя сам.',
+        'К моменту начала кампании Атос уже успел заразиться вампиризмом (по собственным словам игрока — является ' +
+          'порождением вампира) и открыто ставит целью вылечиться, но перед этим — «протестить на себе все слабости ' +
+          'вампиров».'
+      ]
+    },
+
+    fourth: {
+      name: 'Четвёртый герой', tag: 'Имя и класс ещё не определены',
+      concept: 'Место для четвёртого игрока — заполните карточку, как только будут известны раса/класс/предыстория.',
+      traits: null, strengths: null, weaknesses: null,
+      strahdView: 'Появится, когда будет что анализировать — присланное описание персонажа сразу ляжет в основу.',
+      hooks: [],
+      backstory: [],
+      isPlaceholder: true
+    }
+  };
+
+  // ---------- Dice utilities for monster stat blocks ----------
+
+  function parseDice(formula) {
+    var f = String(formula).replace(/\s+/g, '');
+    var m = f.match(/^(\d+)?[dк](\d+)([+-]\d+)?$/i);
+    if (m) return { count: m[1] ? parseInt(m[1], 10) : 1, die: parseInt(m[2], 10), mod: m[3] ? parseInt(m[3], 10) : 0 };
+    var flat = f.match(/^([+-]?\d+)$/);
+    if (flat) return { count: 0, die: 0, mod: parseInt(flat[1], 10) };
+    return null;
+  }
+  function rollFormula(formula) {
+    var p = parseDice(formula);
+    if (!p) return null;
+    var rolls = [];
+    for (var i = 0; i < p.count; i++) rolls.push(rollDie(p.die));
+    var sum = rolls.reduce(function (a, b) { return a + b; }, 0) + p.mod;
+    return { rolls: rolls, mod: p.mod, total: sum };
+  }
+  function displayDice(formula) { return String(formula).replace(/d/gi, 'к'); }
+  function rollAttack(toHit) {
+    var d20 = rollDie(20);
+    return { d20: d20, total: d20 + toHit, crit: d20 === 20, fumble: d20 === 1 };
+  }
+  function abilityMod(monster, key) {
+    var a = monster.abilities && monster.abilities[key];
+    return a ? a[1] : 0;
+  }
+
+  // Находит в тексте результата броска нотацию количества (напр. «1к6», «3к6», «1к4+1»)
+  // и сразу же заменяет её на итоговое, честно брошенное число — чтобы не нужно было
+  // отдельно бросать кубик за размер группы монстров/предметов после самого результата.
+  function rollQuantitiesInText(str) {
+    return str.replace(/(\d+)к(\d+)([+-]\d+)?/g, function (full, count, die, mod) {
+      var c = parseInt(count, 10), d = parseInt(die, 10), m = mod ? parseInt(mod, 10) : 0;
+      var total = m;
+      for (var i = 0; i < c; i++) total += rollDie(d);
+      return String(total);
+    });
+  }
+
+  // ---------- linkify: turn [tag] references into clickable stat-block links ----------
+
+  function linkify(str) {
+    var frag = document.createDocumentFragment();
+    var re = /\[([^\]]+)\]/g;
+    var last = 0, m;
+    while ((m = re.exec(str))) {
+      if (m.index > last) frag.appendChild(text(str.slice(last, m.index)));
+      var key = TAG_TO_KEY[normalizeTag(m[1])];
+      if (key && MONSTERS[key]) {
+        var btn = el('button', { class: 'mon-link', type: 'button' }, [text(MONSTERS[key].name)]);
+        btn.setAttribute('data-mon-key', key);
+        frag.appendChild(btn);
+      } else {
+        frag.appendChild(text(m[0]));
+      }
+      last = re.lastIndex;
+    }
+    if (last < str.length) frag.appendChild(text(str.slice(last)));
+    return frag;
+  }
+
+  // ---------- Rendering: table cards ----------
+
+  function el(tag, attrs, children) {
+    var node = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      if (k === 'class') node.className = attrs[k];
+      else if (k === 'html') node.innerHTML = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    (children || []).forEach(function (c) { if (c) node.appendChild(c); });
+    return node;
+  }
+  function text(t) { return document.createTextNode(t); }
+  function riskBadge(risk) {
+    if (!risk) return null;
+    return el('span', { class: 'risk-badge risk-' + risk }, [text(RISK_LABEL[risk] || risk)]);
+  }
+
+  function buildFullTable(tbl) {
+    var wrap = el('details', { class: 'full' });
+    wrap.appendChild(el('summary', {}, [text('Показать таблицу целиком')]));
+    var scroll = el('div', { class: 'table-scroll' });
+    var table = el('table', { class: 'rows' });
+    var hasRisk = tbl.type === 'sum' && tbl.rows.some(function (r) { return r[2]; });
+
+    var thead = el('thead');
+    var headCells = [];
+    if (tbl.type === 'seq') headCells = ['№', 'Результат'];
+    else if (tbl.type === 'range') headCells = ['Диапазон', 'Результат'];
+    else headCells = hasRisk ? ['Сумма', 'Результат', 'Риск'] : ['Сумма', 'Результат'];
+    thead.appendChild(el('tr', {}, headCells.map(function (h) { return el('th', {}, [text(h)]); })));
+    table.appendChild(thead);
+
+    var body = el('tbody');
+
+    if (tbl.type === 'seq') {
+      tbl.rows.forEach(function (r, i) {
+        body.appendChild(el('tr', {}, [
+          el('td', {}, [text((i + 1) + '')]),
+          el('td', {}, [linkify(r)])
+        ]));
+      });
+    } else if (tbl.type === 'range') {
+      tbl.rows.forEach(function (r) {
+        var label = r[0] === r[1] ? String(r[0]) : (r[0] + '–' + r[1]);
+        body.appendChild(el('tr', {}, [
+          el('td', {}, [text(label)]),
+          el('td', {}, [linkify(r[2])])
+        ]));
+      });
+    } else if (tbl.type === 'sum') {
+      tbl.rows.forEach(function (r) {
+        var cells = [el('td', {}, [text(r[0] + '')]), el('td', {}, [linkify(r[1])])];
+        if (hasRisk) cells.push(el('td', {}, [riskBadge(r[2])]));
+        body.appendChild(el('tr', {}, cells));
+      });
+    }
+    table.appendChild(body);
+    scroll.appendChild(table);
+    wrap.appendChild(scroll);
+    return wrap;
+  }
+
+  function pickResult(tbl) {
+    if (tbl.type === 'sum') {
+      var a = rollDie(tbl.diceA), b = rollDie(tbl.diceB), sum = a + b;
+      var row = tbl.rows.filter(function (r) { return r[0] === sum; })[0];
+      return { roll: a + ' + ' + b + ' = ' + sum, die: sum, text: row ? row[1] : '—', risk: row ? row[2] : null };
+    }
+    if (tbl.type === 'range') {
+      var maxVal = tbl.rows[tbl.rows.length - 1][1];
+      var n = rollDie(maxVal);
+      var found = tbl.rows.filter(function (r) { return n >= r[0] && n <= r[1]; })[0];
+      return { roll: n + '', die: n, text: found ? found[2] : '—' };
+    }
+    if (tbl.type === 'seq') {
+      var idx = rollDie(tbl.rows.length);
+      return { roll: idx + '', die: idx, text: tbl.rows[idx - 1] };
+    }
+  }
+
+  function buildCard(tbl) {
+    var dieFace = el('div', { class: 'die-face' }, [text('—')]);
+    var resultBox = el('div', { class: 'result' }, [el('span', { class: 'placeholder' }, [text('Ещё не брошено')])]);
+
+    var btn = el('button', { class: 'roll', type: 'button' }, [text('Бросить')]);
+    btn.addEventListener('click', function () {
+      var r = pickResult(tbl);
+      dieFace.classList.remove('spin');
+      void dieFace.offsetWidth;
+      dieFace.classList.add('spin');
+      dieFace.textContent = r.die;
+      resultBox.innerHTML = '';
+      resultBox.appendChild(el('b', {}, [text(r.roll)]));
+      resultBox.appendChild(text('  '));
+      resultBox.appendChild(linkify(rollQuantitiesInText(r.text)));
+      var badge = riskBadge(r.risk);
+      if (badge) resultBox.appendChild(badge);
+    });
+
+    var head = el('div', { class: 'card-head' }, [
+      el('h3', {}, [text(tbl.title)]),
+      el('span', { class: 'die-badge' }, [text(tbl.die)])
+    ]);
+
+    var children = [head];
+    if (tbl.note) children.push(el('p', { class: 'card-note' }, [text(tbl.note)]));
+    children.push(el('div', { class: 'roll-row' }, [btn, dieFace, resultBox]));
+    children.push(buildFullTable(tbl));
+
+    return el('div', { class: 'card', id: 'tbl-' + tbl.id }, children);
+  }
+
+  Object.keys(TABLES).forEach(function (group) {
+    var mount = document.getElementById('grid-' + group);
+    if (!mount) return;
+    TABLES[group].forEach(function (tbl) { mount.appendChild(buildCard(tbl)); });
+  });
+
+  // ---------- Route planner ----------
+
+  var NODES = [
+    { id: 'krezk', label: 'Крезк' },
+    { id: 'abbey', label: 'Аббатство Святой Марковии' },
+    { id: 'winery', label: 'Винный Волшебник' },
+    { id: 'argynvostholt', label: 'Аргинвостхольт' },
+    { id: 'berez', label: 'Руины Береза (хижина Бабы Лысаги)' },
+    { id: 'vallaki', label: 'Валлаки (вкл. «Синюю Воду» и Вахтерхаус)' },
+    { id: 'bonegrinder', label: 'Старая Костедробилка' },
+    { id: 'vanrichten', label: 'Башня ван Рихтена' },
+    { id: 'ravenloft', label: 'Замок Равенлофт' },
+    { id: 'tserpool', label: 'Лагерь вистани (Тсер-Пул)' },
+    { id: 'barovia', label: 'Деревня Баровия (вкл. Дом смерти)' }
+  ];
+
+  // km, приблизительно, по масштабу карты (см. заметку под формой)
+  var EDGES = [
+    ['krezk', 'abbey', 3],
+    ['krezk', 'winery', 9],
+    ['winery', 'argynvostholt', 10],
+    ['argynvostholt', 'berez', 8],
+    ['krezk', 'vallaki', 24],
+    ['vallaki', 'bonegrinder', 9],
+    ['bonegrinder', 'vanrichten', 6],
+    ['bonegrinder', 'ravenloft', 12],
+    ['ravenloft', 'tserpool', 6],
+    ['tserpool', 'barovia', 10]
+  ];
+
+  var SPEEDS = { // км/ч, по 5e Travel Pace, переведено в масштаб карты (5 км/ч = пешком, обычный темп)
+    foot: { slow: 3.3, normal: 5, fast: 6.5 },
+    horse: { slow: 6.5, normal: 10, fast: 13 }
+  };
+
+  function buildGraph() {
+    var g = {};
+    NODES.forEach(function (n) { g[n.id] = []; });
+    EDGES.forEach(function (e) {
+      g[e[0]].push({ to: e[1], km: e[2] });
+      g[e[1]].push({ to: e[0], km: e[2] });
+    });
+    return g;
+  }
+  var GRAPH = buildGraph();
+
+  function shortestPath(fromId, toId) {
+    var dist = {}, prev = {}, visited = {};
+    NODES.forEach(function (n) { dist[n.id] = Infinity; });
+    dist[fromId] = 0;
+    var queue = NODES.map(function (n) { return n.id; });
+    while (queue.length) {
+      queue.sort(function (a, b) { return dist[a] - dist[b]; });
+      var u = queue.shift();
+      if (u === toId) break;
+      if (dist[u] === Infinity) break;
+      visited[u] = true;
+      GRAPH[u].forEach(function (edge) {
+        if (visited[edge.to]) return;
+        var nd = dist[u] + edge.km;
+        if (nd < dist[edge.to]) { dist[edge.to] = nd; prev[edge.to] = u; }
+      });
+    }
+    if (dist[toId] === Infinity) return null;
+    var path = [toId], legs = [];
+    var cur = toId;
+    while (prev[cur] !== undefined) {
+      var p = prev[cur];
+      var edgeKm = GRAPH[p].filter(function (e) { return e.to === cur; })[0].km;
+      legs.unshift(edgeKm);
+      path.unshift(p);
+      cur = p;
+    }
+    return { path: path, legs: legs, total: dist[toId] };
+  }
+
+  function nodeLabel(id) {
+    var n = NODES.filter(function (x) { return x.id === id; })[0];
+    return n ? n.label : id;
+  }
+
+  function fmtTime(hours) {
+    var totalMin = Math.round(hours * 60);
+    var d = Math.floor(totalMin / 1440);
+    var h = Math.floor((totalMin % 1440) / 60);
+    var m = totalMin % 60;
+    var parts = [];
+    if (d) parts.push(d + ' дн');
+    if (h || d) parts.push(h + ' ч');
+    parts.push(m + ' мин');
+    return parts.join(' ');
+  }
+
+  function fmtClock(mins) {
+    mins = ((mins % 1440) + 1440) % 1440;
+    var h = Math.floor(mins / 60), m = mins % 60;
+    return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m;
+  }
+
+  function isDay(minsOfDay) {
+    var m = ((minsOfDay % 1440) + 1440) % 1440;
+    return m >= 360 && m < 1200; // 06:00–20:00
+  }
+
+  function fillSelect(sel, defaultId) {
+    NODES.forEach(function (n) {
+      var opt = el('option', { value: n.id }, [text(n.label)]);
+      sel.appendChild(opt);
+    });
+    sel.value = defaultId;
+  }
+
+  function runRoute() {
+    var fromId = document.getElementById('rt-from').value;
+    var toId = document.getElementById('rt-to').value;
+    var mode = document.getElementById('rt-mode').value;
+    var pace = document.getElementById('rt-pace').value;
+    var terrain = document.getElementById('rt-terrain').value;
+    var startStr = document.getElementById('rt-start').value || '08:00';
+    var startParts = startStr.split(':').map(Number);
+    var startMin = startParts[0] * 60 + (startParts[1] || 0);
+
+    var out = document.getElementById('rt-output');
+    out.innerHTML = '';
+
+    if (fromId === toId) {
+      out.appendChild(el('p', { class: 'check-empty' }, [text('Начало и конец пути совпадают — отряд уже на месте.')]));
+      return;
+    }
+
+    var route = shortestPath(fromId, toId);
+    if (!route) {
+      out.appendChild(el('p', { class: 'check-empty' }, [text('Между этими точками нет известного пути в этой карте дорог.')]));
+      return;
+    }
+
+    var speed = SPEEDS[mode][pace];
+    var hours = route.total / speed;
+
+    var summary = el('div', { class: 'route-summary' }, [
+      el('div', { class: 'route-stat' }, [el('div', { class: 'num' }, [text(route.total + ' км')]), el('div', { class: 'cap' }, [text('расстояние')])]),
+      el('div', { class: 'route-stat' }, [el('div', { class: 'num' }, [text(fmtTime(hours))]), el('div', { class: 'cap' }, [text('время в пути')])]),
+      el('div', { class: 'route-stat' }, [el('div', { class: 'num' }, [text(speed + ' км/ч')]), el('div', { class: 'cap' }, [text(mode === 'foot' ? 'пешком' : 'верхом')])])
+    ]);
+    out.appendChild(summary);
+
+    var pathRow = el('div', { class: 'route-path' });
+    route.path.forEach(function (id, i) {
+      pathRow.appendChild(el('span', { class: 'stop' }, [text(nodeLabel(id))]));
+      if (i < route.legs.length) pathRow.appendChild(el('span', { class: 'leg' }, [text('— ' + route.legs[i] + ' км →')]));
+    });
+    out.appendChild(pathRow);
+
+    if (hours > 8) {
+      var days = Math.ceil(hours / 8);
+      out.appendChild(el('div', { class: 'warning-box' }, [text(
+        'Путь дольше 8 часов передвижения (' + fmtTime(hours) + ') — за один день отряд столько не пройдёт. ' +
+        'Разбей его примерно на ' + days + ' дн. пути с ночлегом, либо форсируй марш: за каждый час сверх 8-го — ' +
+        'спасбросок Телосложения (Сл 10, +1 за каждый доп. час), провал даёт уровень истощения (Книга игрока, «Передвижение»).'
+      )]));
+    }
+
+    var checkList = el('div', { class: 'check-list' });
+    var totalMinutes = Math.round(hours * 60);
+    var ticks = Math.floor(totalMinutes / 30);
+    var threshold = terrain === 'road' ? 18 : 15;
+    var anyHit = false;
+
+    if (ticks === 0) {
+      out.appendChild(el('p', { class: 'check-empty' }, [text('Путь короче 30 минут — проверка на случайное столкновение не требуется.')]));
+    } else {
+      for (var i = 1; i <= ticks; i++) {
+        var atMin = startMin + i * 30;
+        var day = isDay(atMin);
+        var d20 = rollDie(20);
+        var hit = d20 >= threshold;
+        var row = el('div', { class: 'check-item' + (hit ? ' hit' : '') });
+        row.appendChild(el('div', { class: 'time' }, [text(fmtClock(atMin))]));
+        row.appendChild(el('div', { class: 'phase', title: day ? 'день' : 'ночь' }, [text(day ? '☼' : '☾')]));
+        var bodyChildren = [];
+        if (hit) {
+          anyHit = true;
+          var tbl = TABLES.encounters.filter(function (t) { return t.id === (day ? 'day-barovia' : 'night-barovia'); })[0];
+          var res = pickResult(tbl);
+          bodyChildren.push(el('div', {}, [
+            el('b', {}, [text('Столкновение (к20=' + d20 + '): ')]),
+            linkify(rollQuantitiesInText(res.text))
+          ]));
+          var badge = riskBadge(res.risk);
+          if (badge) bodyChildren.push(badge);
+          bodyChildren.push(el('div', { class: 'roll-note' }, [text('состав: ' + res.roll)]));
+        } else {
+          bodyChildren.push(el('div', { class: 'roll-note' }, [text('проверка на к20: ' + d20 + ' — тихо')]));
+        }
+        row.appendChild(el('div', { class: 'body' }, bodyChildren));
+        checkList.appendChild(row);
+      }
+      out.appendChild(checkList);
+      if (!anyHit) {
+        out.appendChild(el('p', { class: 'check-empty' }, [text('За весь путь ни одной проверки не сработало — дорога выдалась на удивление спокойной.')]));
+      }
+    }
+  }
+
+  var fromSel = document.getElementById('rt-from');
+  var toSel = document.getElementById('rt-to');
+  fillSelect(fromSel, 'krezk');
+  fillSelect(toSel, 'barovia');
+  document.getElementById('rt-calc').addEventListener('click', runRoute);
+  runRoute(); // показать пример при загрузке
+
+  // ---------- Monster stat-block modal ----------
+
+  var SOURCE_LABEL = {
+    book: 'Приложение D книги', dndsu: 'dnd.su · MM 2014', mm: 'MM 2014 (не сверено с dnd.su)'
+  };
+  var ABILITY_LABEL = { str: 'СИЛ', dex: 'ЛОВ', con: 'ТЕЛ', int: 'ИНТ', wis: 'МДР', cha: 'ХАР' };
+  var ABILITY_ORDER = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
+
+  function metaLine(label, value) {
+    if (!value) return null;
+    return el('div', { class: 'mon-meta-line' }, [el('b', {}, [text(label)]), linkify(value)]);
+  }
+
+  function buildActionBlock(mon, action) {
+    var wrap = el('div', { class: 'mon-action' });
+    var head = el('div', {}, [el('b', {}, [text(action.name)])]);
+    wrap.appendChild(head);
+    if (action.reach) wrap.appendChild(el('div', { class: 'mon-meta-line' }, [text(action.reach)]));
+    if (action.text) wrap.appendChild(el('div', {}, [linkify(action.text)]));
+
+    var rollRow = el('div', { class: 'mon-roll-row' });
+    var hasRoll = false;
+
+    if (typeof action.toHit === 'number') {
+      hasRoll = true;
+      var atkBtn = el('button', { class: 'mon-roll', type: 'button' }, [text('Атака +' + action.toHit)]);
+      var atkRes = el('span', { class: 'mon-roll-result' });
+      atkBtn.addEventListener('click', function () {
+        var r = rollAttack(action.toHit);
+        atkRes.textContent = 'к20=' + r.d20 + ' → ' + r.total + (r.crit ? ' (крит!)' : r.fumble ? ' (провал)' : '');
+      });
+      rollRow.appendChild(atkBtn);
+      rollRow.appendChild(atkRes);
+    }
+
+    (action.damage || []).forEach(function (d) {
+      hasRoll = true;
+      var dmgBtn = el('button', { class: 'mon-roll', type: 'button' }, [text('Урон ' + displayDice(d.formula) + ' ' + d.type)]);
+      var dmgRes = el('span', { class: 'mon-roll-result' });
+      dmgBtn.addEventListener('click', function () {
+        var r = rollFormula(d.formula);
+        if (r) dmgRes.textContent = (r.rolls.length ? '[' + r.rolls.join('+') + ']' + (r.mod ? (r.mod > 0 ? '+' + r.mod : r.mod) : '') + ' = ' : '') + r.total;
+      });
+      rollRow.appendChild(dmgBtn);
+      rollRow.appendChild(dmgRes);
+    });
+
+    if (hasRoll) wrap.appendChild(rollRow);
+    return wrap;
+  }
+
+  function buildMonsterModal(mon, monKey) {
+    var m = el('div', {}, []);
+    m.appendChild(el('button', { class: 'mon-close', type: 'button', 'aria-label': 'Закрыть' }, [text('✕')]));
+    m.appendChild(el('h2', {}, [text(mon.name), el('span', { class: 'mon-source-tag' }, [text(SOURCE_LABEL[mon.source] || mon.source)])]));
+    m.appendChild(el('p', { class: 'mon-type' }, [text(mon.type)]));
+
+    var quick = el('div', { class: 'mon-quickbar' });
+    var initBtn = el('button', { class: 'mon-roll', type: 'button' }, [text('Инициатива')]);
+    var initRes = el('span', { class: 'mon-roll-result' });
+    initBtn.addEventListener('click', function () {
+      var mod = abilityMod(mon, 'dex');
+      var r = rollAttack(mod);
+      initRes.textContent = 'к20=' + r.d20 + ' → ' + r.total;
+    });
+    quick.appendChild(initBtn); quick.appendChild(initRes);
+
+    var hpBtn = el('button', { class: 'mon-roll', type: 'button' }, [text('Перебросить хиты (' + displayDice(mon.hp.formula) + ')')]);
+    var hpRes = el('span', { class: 'mon-roll-result' });
+    hpBtn.addEventListener('click', function () {
+      var r = rollFormula(mon.hp.formula);
+      if (r) hpRes.textContent = r.total + ' хитов';
+    });
+    quick.appendChild(hpBtn); quick.appendChild(hpRes);
+
+    if (monKey) {
+      var toCombatBtn = el('button', { class: 'mon-roll', type: 'button' }, [text('+ В трекер боя')]);
+      var toCombatRes = el('span', { class: 'mon-roll-result' });
+      toCombatBtn.addEventListener('click', function () {
+        addMonsterKeyToCombat(monKey);
+        toCombatRes.textContent = 'добавлен(о)';
+      });
+      quick.appendChild(toCombatBtn); quick.appendChild(toCombatRes);
+    }
+    m.appendChild(quick);
+
+    [
+      metaLine('КД', mon.ac),
+      metaLine('Хиты', mon.hp.avg + ' (' + displayDice(mon.hp.formula) + ')'),
+      metaLine('Скорость', mon.speed)
+    ].forEach(function (n) { if (n) m.appendChild(n); });
+
+    var abilGrid = el('div', { class: 'mon-abilities' });
+    ABILITY_ORDER.forEach(function (k) {
+      var a = mon.abilities[k];
+      abilGrid.appendChild(el('div', { class: 'mon-ability' }, [
+        el('div', { class: 'lab' }, [text(ABILITY_LABEL[k])]),
+        el('div', { class: 'val' }, [text(a[0] + '')]),
+        el('div', { class: 'mod' }, [text((a[1] >= 0 ? '+' : '') + a[1])])
+      ]));
+    });
+    m.appendChild(abilGrid);
+
+    [
+      metaLine('Спасброски', mon.saves),
+      metaLine('Навыки', mon.skills),
+      metaLine('Уязвимости', mon.vulnerabilities),
+      metaLine('Сопротивления', mon.resistances),
+      metaLine('Иммунитет к урону', mon.immunities),
+      metaLine('Иммунитет к состояниям', mon.condImmunities),
+      metaLine('Чувства', mon.senses),
+      metaLine('Языки', mon.languages),
+      metaLine('Опасность', mon.cr)
+    ].forEach(function (n) { if (n) m.appendChild(n); });
+
+    if (mon.traits && mon.traits.length) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Черты')]));
+      mon.traits.forEach(function (t) {
+        m.appendChild(el('div', { class: 'mon-trait' }, [el('b', {}, [text(t.name + '. ')]), linkify(t.text)]));
+      });
+    }
+
+    if (mon.actions && mon.actions.length) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Действия')]));
+      mon.actions.forEach(function (a) { m.appendChild(buildActionBlock(mon, a)); });
+    }
+
+    if (mon.legendary && mon.legendary.length) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Легендарные действия')]));
+      mon.legendary.forEach(function (a) { m.appendChild(buildActionBlock(mon, a)); });
+    }
+
+    if (mon.reactions && mon.reactions.length) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Реакции')]));
+      mon.reactions.forEach(function (a) {
+        m.appendChild(el('div', { class: 'mon-trait' }, [el('b', {}, [text(a.name + '. ')]), linkify(a.text)]));
+      });
+    }
+
+    if (mon.note) m.appendChild(el('p', { class: 'mon-source-note' }, [text(mon.note)]));
+
+    return m;
+  }
+
+  var monBackdrop = document.getElementById('mon-backdrop');
+  var monModal = document.getElementById('mon-modal');
+
+  function openMonster(key) {
+    var mon = MONSTERS[key];
+    if (!mon) return;
+    monModal.innerHTML = '';
+    monModal.appendChild(buildMonsterModal(mon, key));
+    monBackdrop.classList.add('open');
+  }
+  function closeMonster() {
+    monBackdrop.classList.remove('open');
+  }
+
+  // ---------- Партия: карточки + модалка ----------
+
+  function buildPlayerCard(key) {
+    var p = PLAYERS[key];
+    var head = el('div', { class: 'card-head' }, [
+      el('h3', {}, [text(p.name)]),
+      el('span', { class: 'die-badge' }, [text(p.tag)])
+    ]);
+    var btn = el('button', { class: 'roll', type: 'button' }, [text(p.isPlaceholder ? 'Заполнить' : 'Открыть заметки')]);
+    btn.setAttribute('data-player-key', key);
+    btn.classList.add('player-open');
+    var children = [head, el('p', { class: 'card-note concept' }, [text(p.concept)]), el('div', { class: 'roll-row' }, [btn])];
+    return el('div', { class: 'card player-card', id: 'player-' + key }, children);
+  }
+
+  function buildPlayerModalContent(key) {
+    var p = PLAYERS[key];
+    var m = el('div', {});
+    m.appendChild(el('button', { class: 'mon-close', type: 'button', 'aria-label': 'Закрыть' }, [text('✕')]));
+    m.appendChild(el('h2', {}, [text(p.name)]));
+    m.appendChild(el('p', { class: 'mon-type' }, [text(p.tag)]));
+    m.appendChild(el('p', {}, [linkify(p.concept)]));
+
+    m.appendChild(el('div', { class: 'mon-section-title' }, [text('Характер')]));
+    if (p.traits) m.appendChild(el('div', { class: 'mon-trait' }, [el('b', {}, [text('Черты. ')]), linkify(p.traits)]));
+    m.appendChild(el('div', { class: 'mon-trait' }, [
+      el('b', {}, [text('Сильные стороны. ')]),
+      p.strengths ? linkify(p.strengths) : el('span', { class: 'player-tbd' }, [text('пока не определены')])
+    ]));
+    m.appendChild(el('div', { class: 'mon-trait' }, [
+      el('b', {}, [text('Слабые стороны. ')]),
+      p.weaknesses ? linkify(p.weaknesses) : el('span', { class: 'player-tbd' }, [text('пока не определены')])
+    ]));
+
+    if (p.strahdView) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Как его видит Страд')]));
+      m.appendChild(el('div', { class: 'mon-trait' }, [linkify(p.strahdView)]));
+    }
+
+    if (p.hooks && p.hooks.length) {
+      m.appendChild(el('div', { class: 'mon-section-title' }, [text('Текущие цели и сюжетные нити')]));
+      p.hooks.forEach(function (h) { m.appendChild(el('div', { class: 'player-hook' }, [text('— '), linkify(h)])); });
+    }
+
+    if (p.backstory && p.backstory.length) {
+      var det = el('details', { class: 'full' });
+      det.appendChild(el('summary', {}, [text('Показать полную предысторию')]));
+      var wrap = el('div', { class: 'player-backstory', style: 'margin-top:10px' });
+      p.backstory.forEach(function (para) { wrap.appendChild(el('p', {}, [linkify(para)])); });
+      det.appendChild(wrap);
+      m.appendChild(det);
+    }
+
+    if (p.isPlaceholder) {
+      m.appendChild(el('p', { class: 'mon-source-note' }, [text('Пришлите имя, расу/класс и любые детали персонажа — я сразу заполню карточку и допишу мнение Страда о нём.')]));
+    }
+
+    return m;
+  }
+
+  var playerBackdrop = monBackdrop; // модалка общая с чарниками монстров
+  function openPlayer(key) {
+    var p = PLAYERS[key];
+    if (!p) return;
+    monModal.innerHTML = '';
+    monModal.appendChild(buildPlayerModalContent(key));
+    monBackdrop.classList.add('open');
+  }
+
+  var partyGrid = document.getElementById('grid-party');
+  if (partyGrid) {
+    Object.keys(PLAYERS).forEach(function (key) { partyGrid.appendChild(buildPlayerCard(key)); });
+  }
+
+  // ---------- Combat tracker (инициатива + хиты) ----------
+
+  var combat = [];
+  var combatTurn = 0;
+  var combatRound = 1;
+  var tkIdCounter = 0;
+  function nextTkId() { return 'c' + (tkIdCounter++); }
+
+  function sortCombatByInit() {
+    var currentId = combat[combatTurn] ? combat[combatTurn].id : null;
+    combat.sort(function (a, b) { return b.init - a.init; });
+    if (currentId) {
+      var idx = combat.map(function (c) { return c.id; }).indexOf(currentId);
+      combatTurn = idx >= 0 ? idx : 0;
+    }
+  }
+
+  function renderCombat() {
+    var list = document.getElementById('tk-list');
+    if (!list) return;
+    list.innerHTML = '';
+    if (!combat.length) {
+      list.appendChild(el('p', { class: 'check-empty' }, [text('Бой пуст — добавьте участников выше.')]));
+      return;
+    }
+    combat.forEach(function (c, idx) {
+      var isCurrent = idx === combatTurn;
+      var isDown = c.hp <= 0;
+      var nameNode;
+      if (c.monKey && MONSTERS[c.monKey]) {
+        nameNode = el('button', { class: 'mon-link', type: 'button' }, [text(c.name)]);
+        nameNode.setAttribute('data-mon-key', c.monKey);
+      } else {
+        nameNode = text(c.name);
+      }
+      var nameWrap = el('div', { class: 'tk-name-wrap' }, [
+        el('div', { class: 'tk-name' + (isDown ? ' down' : '') }, [nameNode]),
+        el('div', { class: 'tk-hp-row' }, [
+          el('input', { type: 'number', class: 'tk-hp-input', 'data-id': c.id, value: c.hp }),
+          el('span', { class: 'tk-hp-max' }, [text('/ ' + c.maxHp)]),
+          el('input', { type: 'number', class: 'tk-delta-input', 'data-id': c.id, placeholder: '±' }),
+          el('button', { class: 'tk-delta', type: 'button', 'data-id': c.id, 'data-op': 'dmg' }, [text('Урон')]),
+          el('button', { class: 'tk-delta heal', type: 'button', 'data-id': c.id, 'data-op': 'heal' }, [text('Лечение')])
+        ])
+      ]);
+      var row = el('div', { class: 'tk-item' + (isCurrent ? ' current' : '') + (isDown ? ' down' : '') }, [
+        el('div', { class: 'tk-init' }, [text(c.init + '')]),
+        nameWrap,
+        el('button', { class: 'tk-remove', type: 'button', 'data-id': c.id, 'aria-label': 'Удалить' }, [text('✕')])
+      ]);
+      list.appendChild(row);
+    });
+  }
+
+  function addMonsterKeyToCombat(key, qty) {
+    var mon = MONSTERS[key];
+    if (!mon) return;
+    qty = qty || 1;
+    for (var i = 1; i <= qty; i++) {
+      var initRoll = rollAttack(abilityMod(mon, 'dex'));
+      var hpRoll = rollFormula(mon.hp.formula);
+      var hp = hpRoll ? hpRoll.total : mon.hp.avg;
+      combat.push({ id: nextTkId(), name: qty > 1 ? (mon.name + ' ' + i) : mon.name, init: initRoll.total, hp: hp, maxHp: hp, monKey: key });
+    }
+    sortCombatByInit();
+    renderCombat();
+  }
+
+  function addCustomToCombat() {
+    var nameInput = document.getElementById('tk-custom-name');
+    var initInput = document.getElementById('tk-custom-init');
+    var hpInput = document.getElementById('tk-custom-hp');
+    var name = nameInput.value.trim();
+    if (!name) return;
+    var init = parseInt(initInput.value, 10);
+    if (isNaN(init)) init = rollDie(20);
+    var hp = parseInt(hpInput.value, 10);
+    if (isNaN(hp)) hp = 10;
+    combat.push({ id: nextTkId(), name: name, init: init, hp: hp, maxHp: hp, monKey: null });
+    sortCombatByInit();
+    renderCombat();
+    nameInput.value = ''; initInput.value = ''; hpInput.value = '';
+  }
+
+  function nextCombatTurn() {
+    if (!combat.length) return;
+    combatTurn++;
+    if (combatTurn >= combat.length) {
+      combatTurn = 0;
+      combatRound++;
+      var roundEl = document.getElementById('tk-round-num');
+      if (roundEl) roundEl.textContent = combatRound;
+    }
+    renderCombat();
+  }
+
+  function clearCombatAll() {
+    combat = []; combatTurn = 0; combatRound = 1;
+    var roundEl = document.getElementById('tk-round-num');
+    if (roundEl) roundEl.textContent = combatRound;
+    renderCombat();
+  }
+
+  var tkMonSelect = document.getElementById('tk-mon-select');
+  if (tkMonSelect) {
+    Object.keys(MONSTERS).sort(function (a, b) {
+      return MONSTERS[a].name.localeCompare(MONSTERS[b].name, 'ru');
+    }).forEach(function (k) {
+      tkMonSelect.appendChild(el('option', { value: k }, [text(MONSTERS[k].name)]));
+    });
+  }
+
+  var tkAddMonBtn = document.getElementById('tk-add-monster');
+  if (tkAddMonBtn) tkAddMonBtn.addEventListener('click', function () {
+    var key = document.getElementById('tk-mon-select').value;
+    var qty = parseInt(document.getElementById('tk-mon-qty').value, 10) || 1;
+    addMonsterKeyToCombat(key, qty);
+  });
+  var tkAddCustomBtn = document.getElementById('tk-add-custom');
+  if (tkAddCustomBtn) tkAddCustomBtn.addEventListener('click', addCustomToCombat);
+  var tkNextTurnBtn = document.getElementById('tk-next-turn');
+  if (tkNextTurnBtn) tkNextTurnBtn.addEventListener('click', nextCombatTurn);
+  var tkClearBtn = document.getElementById('tk-clear');
+  if (tkClearBtn) tkClearBtn.addEventListener('click', clearCombatAll);
+
+  var tkList = document.getElementById('tk-list');
+  if (tkList) {
+    tkList.addEventListener('click', function (ev) {
+      var deltaBtn = ev.target.closest && ev.target.closest('button.tk-delta');
+      if (deltaBtn) {
+        var id = deltaBtn.getAttribute('data-id');
+        var op = deltaBtn.getAttribute('data-op');
+        var deltaInput = tkList.querySelector('.tk-delta-input[data-id="' + id + '"]');
+        var amt = deltaInput ? parseInt(deltaInput.value, 10) : NaN;
+        if (isNaN(amt)) amt = 1;
+        amt = Math.abs(amt);
+        var c = combat.filter(function (x) { return x.id === id; })[0];
+        if (c) {
+          c.hp = Math.max(0, Math.min(c.maxHp, c.hp + (op === 'heal' ? amt : -amt)));
+          renderCombat();
+        }
+        return;
+      }
+      var rem = ev.target.closest && ev.target.closest('button.tk-remove');
+      if (rem) {
+        var rid = rem.getAttribute('data-id');
+        combat = combat.filter(function (x) { return x.id !== rid; });
+        if (combatTurn >= combat.length) combatTurn = 0;
+        renderCombat();
+      }
+    });
+    tkList.addEventListener('change', function (ev) {
+      if (ev.target.classList.contains('tk-hp-input')) {
+        var id = ev.target.getAttribute('data-id');
+        var c = combat.filter(function (x) { return x.id === id; })[0];
+        if (c) {
+          var v = parseInt(ev.target.value, 10);
+          if (!isNaN(v)) c.hp = Math.max(0, Math.min(c.maxHp, v));
+          renderCombat();
+        }
+      }
+    });
+  }
+  renderCombat();
+
+  // ---------- Страд следит (авторский трекер внимания) ----------
+
+  var WATCH_MAX = 10;
+  var watchLevel = 0;
+  var WATCH_TIERS = [
+    {
+      min: 0, max: 2, label: 'Пока не в фокусе',
+      rows: [
+        'Дальний вой волков слышен ночью, но звери не подходят.',
+        'Слуга-вистани издалека провожает партию долгим взглядом.',
+        'Мимолётное чувство, что за партией наблюдают — но ничего не происходит.',
+        'Ворон садится на подоконник и молча смотрит несколько минут, потом улетает.',
+        'Одному из персонажей снится смутный силуэт человека у окна.',
+        'Местные обыватели без видимой причины избегают смотреть партии в глаза.'
+      ]
+    },
+    {
+      min: 3, max: 5, label: 'Страд заинтересован',
+      rows: [
+        'Страд присылает вежливую записку с приглашением на ужин в замке.',
+        'Один из вистани «случайно» делится обрывком полезной информации — слишком удобно для случайности.',
+        'Партия находит личную вещь Страда (гребень, перчатку) — как будто нарочно оставленную «подарком».',
+        'Ночью издалека доносится игра на клавесине — Страд играет для себя, зная, что его слышат.',
+        'Стая летучих мышей кружит над лагерем партии всю ночь, не нападая.',
+        'Кто-то замечает силуэт Страда на крыше или в тумане — он тут же исчезает.'
+      ]
+    },
+    {
+      min: 6, max: 8, label: 'Страд играет с партией',
+      rows: [
+        'Страд лично появляется в гуманоидном облике под чужим именем и предлагает «помощь» с двойным дном.',
+        'Партия попадает в засаду, явно спланированную с расчётом на её собственную тактику из прошлого боя.',
+        'Страд издалека пытается очаровать (способность Очарование) самого слабого духом персонажа.',
+        'Партия находит тело союзника или НИПа с запиской от Страда, дразнящей их по существу дела.',
+        'Вервольфы нападают на лагерь, целенаправленно отсекая и окружая самого слабого персонажа партии.',
+        'Страд лично навещает одного из персонажей во сне и говорит с ним напрямую, ничем не угрожая — пока.'
+      ]
+    },
+    {
+      min: 9, max: 10, label: 'Открытая охота',
+      rows: [
+        'Страд лично атакует партию, но отступает в туман при первых серьёзных потерях — это ещё проверка, не финал.',
+        'Несколько групп прислужников (вервольфы, зомби, культисты) одновременно давят на партию с разных сторон.',
+        'Страд похищает союзника партии как рычаг давления и ждёт, придут ли за ним.',
+        'Страд использует Детей ночи, обрушивая на партию волков, крыс или летучих мышей прямо на дороге.',
+        'Страд лично врывается в разгар важной сцены партии, чтобы демонстративно сорвать её план.',
+        'Страд выходит на прямой разговор с партией и предлагает жестокую сделку — с ценой, которую они не готовы платить.'
+      ]
+    }
+  ];
+
+  function watchTierFor(level) {
+    return WATCH_TIERS.filter(function (t) { return level >= t.min && level <= t.max; })[0] || WATCH_TIERS[0];
+  }
+
+  function renderWatch() {
+    var scale = document.getElementById('watch-scale');
+    var label = document.getElementById('watch-label');
+    if (!scale) return;
+    scale.innerHTML = '';
+    for (var i = 1; i <= WATCH_MAX; i++) {
+      scale.appendChild(el('div', { class: 'watch-pip' + (i <= watchLevel ? ' lit' : '') }));
+    }
+    var tier = watchTierFor(watchLevel);
+    label.textContent = watchLevel + '/' + WATCH_MAX + ' — ' + tier.label;
+  }
+
+  var watchFull = document.getElementById('watch-full');
+  if (watchFull) {
+    WATCH_TIERS.forEach(function (tier) {
+      var block = el('div', { style: 'margin-top:10px' }, [
+        el('div', { class: 'card-note', style: 'font-weight:700;color:var(--accent-2);margin-bottom:4px' }, [text(tier.min + '–' + tier.max + ': ' + tier.label)])
+      ]);
+      var ul = el('div');
+      tier.rows.forEach(function (r) { ul.appendChild(el('div', { class: 'mon-trait' }, [text('— '), linkify(r)])); });
+      block.appendChild(ul);
+      watchFull.appendChild(block);
+    });
+  }
+
+  var watchMinusBtn = document.getElementById('watch-minus');
+  var watchPlusBtn = document.getElementById('watch-plus');
+  if (watchMinusBtn) watchMinusBtn.addEventListener('click', function () { watchLevel = Math.max(0, watchLevel - 1); renderWatch(); });
+  if (watchPlusBtn) watchPlusBtn.addEventListener('click', function () { watchLevel = Math.min(WATCH_MAX, watchLevel + 1); renderWatch(); });
+
+  var watchRollBtn = document.getElementById('watch-roll');
+  if (watchRollBtn) watchRollBtn.addEventListener('click', function () {
+    var tier = watchTierFor(watchLevel);
+    var idx = rollDie(tier.rows.length);
+    var die = document.getElementById('watch-die');
+    die.classList.remove('spin'); void die.offsetWidth; die.classList.add('spin');
+    die.textContent = idx;
+    var resBox = document.getElementById('watch-result');
+    resBox.innerHTML = '';
+    resBox.appendChild(el('b', {}, [text(tier.label + ': ')]));
+    resBox.appendChild(linkify(tier.rows[idx - 1]));
+  });
+
+  renderWatch();
+
+  // ---------- Погода и луна ----------
+
+  var campaignDay = 1;
+  var MOON_PHASES = [
+    'Новолуние', 'Растущий серп', 'Первая четверть', 'Растущая Луна',
+    'Полнолуние', 'Убывающая Луна', 'Последняя четверть', 'Убывающий серп'
+  ];
+  var MOON_ICONS = ['○', '◔', '◑', '◕', '●', '◕', '◑', '◔'];
+  var WEATHER_TABLE = [
+    [1, 2, 'Ясно, хоть солнце и тусклое — редкая передышка от вечной хмари.'],
+    [3, 6, 'Затянуто плотными тучами, сумеречно даже в полдень.'],
+    [7, 9, 'Мелкий, нудный дождь идёт весь день.'],
+    [10, 12, 'Густой холодный туман стелется у земли, видимость около 30 футов.'],
+    [13, 14, 'Порывистый ледяной ветер, разговор на улице приходится вести криком.'],
+    [15, 16, 'Короткая, но сильная гроза с молниями над горами.'],
+    [17, 18, 'Изморозь или первый снег на возвышенностях (Крезк, перевалы).'],
+    [19, 19, 'Аномальная, тревожная тишина — ни ветра, ни звука зверей.'],
+    [20, 20, 'Необычно долгий кроваво-красный закат — дурное предзнаменование по местным поверьям.']
+  ];
+
+  function moonPhaseIndex(day) {
+    var cycle = 28, phaseLen = cycle / MOON_PHASES.length;
+    return Math.floor(((day - 1) % cycle) / phaseLen);
+  }
+
+  function renderCalendar() {
+    var dayEl = document.getElementById('cal-day');
+    var iconEl = document.getElementById('cal-moon-icon');
+    var labelEl = document.getElementById('cal-moon-label');
+    if (!dayEl) return;
+    dayEl.textContent = campaignDay;
+    var idx = moonPhaseIndex(campaignDay);
+    iconEl.textContent = MOON_ICONS[idx];
+    labelEl.textContent = MOON_PHASES[idx];
+  }
+
+  function rollWeather() {
+    var n = rollDie(20);
+    var row = WEATHER_TABLE.filter(function (r) { return n >= r[0] && n <= r[1]; })[0];
+    var resBox = document.getElementById('cal-weather-result');
+    resBox.innerHTML = '';
+    resBox.appendChild(el('b', {}, [text('к20=' + n + ': ')]));
+    resBox.appendChild(text(row ? row[2] : '—'));
+  }
+
+  var calNextDayBtn = document.getElementById('cal-next-day');
+  var calRerollBtn = document.getElementById('cal-reroll-weather');
+  var calResetBtn = document.getElementById('cal-reset-day');
+  if (calNextDayBtn) calNextDayBtn.addEventListener('click', function () { campaignDay++; renderCalendar(); rollWeather(); });
+  if (calRerollBtn) calRerollBtn.addEventListener('click', rollWeather);
+  if (calResetBtn) calResetBtn.addEventListener('click', function () {
+    campaignDay = 1;
+    renderCalendar();
+    var resBox = document.getElementById('cal-weather-result');
+    resBox.innerHTML = '';
+    resBox.appendChild(el('span', { class: 'placeholder' }, [text('Ещё не брошено')]));
+  });
+
+  renderCalendar();
+
+  document.addEventListener('click', function (ev) {
+    var link = ev.target.closest && ev.target.closest('.mon-link');
+    if (link) { openMonster(link.getAttribute('data-mon-key')); return; }
+    var playerBtn = ev.target.closest && ev.target.closest('.player-open');
+    if (playerBtn) { openPlayer(playerBtn.getAttribute('data-player-key')); return; }
+    if (ev.target === monBackdrop) { closeMonster(); return; }
+    if (ev.target.closest && ev.target.closest('.mon-close')) { closeMonster(); return; }
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') closeMonster();
+  });
+})();
+</script>
+
+</body></html>

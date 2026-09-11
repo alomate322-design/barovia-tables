@@ -1,0 +1,15 @@
+{
+  "name": "Кости Баровии",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Настольный справочник ведущего: случайные таблицы, маршрутный калькулятор и трекер боя для кампании Curse of Strahd",
+  "icon": "/icon.svg",
+  "author": "Никита",
+  "action": {
+    "title": "Кости Баровии",
+    "icon": "/icon.svg",
+    "popover": "/index.html",
+    "width": 960,
+    "height": 720
+  }
+}
