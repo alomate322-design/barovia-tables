@@ -814,7 +814,22 @@
   .player-hook b { color: var(--accent-2); }
 </style>
 
-<div class="wrap">
+<!--
+  Owlbear Rodeo не даёт способа спрятать саму иконку/кнопку расширения от
+  игроков — расширения включаются на уровне комнаты и видны в панели всем
+  участникам одинаково. Единственное, что расширение может контролировать
+  само, — это содержимое поповера: скрипт в самом низу страницы проверяет
+  роль через OBR.player.getRole() и, если это не мастер, прячет .wrap и
+  показывает вот эту заглушку вместо него.
+-->
+<div id="gm-gate" hidden style="position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--bg);color:var(--text);">
+  <div style="max-width:320px;">
+    <div style="font-family:'Yeseva One',serif;font-size:20px;margin-bottom:10px;">Кости Баровии</div>
+    <div style="font-size:13px;color:var(--text-muted);line-height:1.6;">Этот справочник — личные заметки мастера, игрокам он не показывается.</div>
+  </div>
+</div>
+
+<div class="wrap" id="wrap" style="visibility:hidden">
   <header class="top">
     <p class="kicker">Проклятие Страда · настольный справочник ведущего</p>
     <h1>Кости Баровии</h1>
@@ -2982,6 +2997,71 @@
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape') closeMonster();
   });
+})();
+
+// ---------- Owlbear Rodeo: спрятать содержимое от игроков ----------
+// См. комментарий у #gm-gate выше — кнопку/значок расширения спрятать
+// нельзя (Owlbear Rodeo включает расширения на уровне комнаты, видно
+// всем), поэтому прячем сами данные: .wrap изначально скрыт (visibility:
+// hidden прямо в разметке — до всякого JS, чтобы не было даже доли
+// секунды мелькания контента), и показываем его ТОЛЬКО когда точно
+// подтвердили, что открывший — мастер. Если роль подтвердить не удалось
+// (сеть, таймаут, ошибка SDK) — контент остаётся скрытым, а не наоборот:
+// лучше лишний раз показать заглушку мастеру, чем хоть раз показать
+// заметки игроку.
+(function () {
+  var wrap = document.getElementById('wrap');
+  var gate = document.getElementById('gm-gate');
+
+  function reveal() {
+    if (wrap) wrap.style.visibility = 'visible';
+    if (gate) gate.hidden = true;
+  }
+  function keepHidden() {
+    if (gate) gate.hidden = false;
+  }
+
+  var settled = false;
+  // Подстраховка: если проверка роли зависнет (SDK не загрузился, OBR не
+  // ответил) — через 8 секунд молча остаёмся в заглушке, а не открываем
+  // контент навсегда скрытым для ВСЕХ (включая мастера). Мастер в таком
+  // случае увидит заглушку и поймёт, что стоит обновить страницу.
+  var timeout = setTimeout(function () {
+    if (!settled) { settled = true; keepHidden(); }
+  }, 8000);
+
+  (async function () {
+    try {
+      var mod = await import('https://cdn.jsdelivr.net/npm/@owlbear-rodeo/sdk@3.1.0/+esm');
+      var OBR = mod.default;
+      if (!OBR.isAvailable) {
+        // Открыто не внутри Owlbear Rodeo (например мастер тестирует
+        // напрямую в браузере) — роль проверить нечем, показываем как
+        // обычную страницу.
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        reveal();
+        return;
+      }
+      OBR.onReady(async function () {
+        try {
+          var role = await OBR.player.getRole();
+          if (settled) return;
+          settled = true;
+          clearTimeout(timeout);
+          if (role === 'GM') reveal();
+          else keepHidden();
+        } catch (err) {
+          console.warn('[Кости Баровии] не удалось проверить роль игрока', err);
+          if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
+        }
+      });
+    } catch (err) {
+      console.warn('[Кости Баровии] не удалось загрузить Owlbear SDK для проверки роли', err);
+      if (!settled) { settled = true; clearTimeout(timeout); keepHidden(); }
+    }
+  })();
 })();
 </script>
 
